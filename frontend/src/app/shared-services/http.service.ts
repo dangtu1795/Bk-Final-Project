@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {HttpHeaders, HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs/operators/catchError";
+import {tap} from "rxjs/operators/tap";
 
 
 @Injectable()
@@ -24,38 +25,44 @@ export class HttpService {
     })
   }
 
-  get(link, query?): Observable<any> {
+  get(link): Observable<any> {
     return this.http.get(`${this.server}/${link}`, {headers: this.headers}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }
 
   post(link, data): Observable<any> {
     return this.http.post(`${this.server}/${link}`, data, {headers: this.headers}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }
 
   postForm(link, formData): Observable<any> {
     return this.http.post(`${this.server}/${link}`, formData, {headers: this.formDataHeaders}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }
 
   put(link, data): Observable<any> {
     return this.http.put(`${this.server}/${link}`, data, {headers: this.headers}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }
 
   putForm(link, formData): Observable<any> {
     return this.http.put(`${this.server}/${link}`, formData, {headers: this.formDataHeaders}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }
 
   delete(link): Observable<any> {
     return this.http.delete(`${this.server}/link`, {headers: this.headers}).pipe(
+      tap(data => console.log(`${this.server}/${link}:`,data)),
       catchError(this.handleError)
     );
   }

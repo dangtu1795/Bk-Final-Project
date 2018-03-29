@@ -4,6 +4,32 @@ import ResponseTemplate from "../../helpers/response-template";
 import {ResponseCode} from "../../enums/response-code";
 import misc from "../../libs/misc";
 import {schemas} from "../../schemas/index";
+import {
+    EmailConstraints, PasswordConstraint, NameConstraint,
+    PhoneConstraints, RoleConstraint
+} from "../../helpers/validate-contraints";
+import validateHelper from "../../helpers/validate-helper"
+
+const listConstraints = {
+    "email": {
+        validates: [...EmailConstraints]
+    },
+    "password": {
+        validates: [...PasswordConstraint]
+    },
+    "confirm_password": {
+        validates: [...PasswordConstraint]
+    },
+    "name": {
+        validates: [...NameConstraint]
+    },
+    "phone": {
+        validates: [...PhoneConstraints]
+    },
+    "role": {
+        validates: [...RoleConstraint]
+    }
+};
 
 class User extends CrubAPI {
     async list(req: Request, res: Response) {
@@ -25,13 +51,36 @@ class User extends CrubAPI {
 
     async create(req: Request, res: Response) {
         try {
-            let {email, password, name, phone, gender, role} = req.body;
-            if (!email || !password) {
-                res.send(ResponseTemplate.error({
-                    code: ResponseCode.DATA_NOT_FOUND,
-                    message: "Missing data",
-                    error: null
+            let {email, password, password_confirm, name, phone, gender, role} = req.body;
+
+            let valid_item = {};
+            for (let key of Object.keys(req.body)) {
+                if (req.body[key] != null && req.body[key] != undefined && listConstraints[key]) {
+                    valid_item[key] = req.body[key];
+                }
+            }
+
+            let valid = validateHelper.runValidatingObject(valid_item, listConstraints);
+            if (valid) {
+                return res.send(ResponseTemplate.error({
+                    code: ResponseCode.INPUT_DATA_NULL,
+                    message: valid.message,
+                    error: {
+                        key: valid.key,
+                        data: valid.data
+                    }
                 }));
+            }
+
+            if (password !== password_confirm) {
+                return res.send(ResponseTemplate.error({
+                    code: ResponseCode.DATA_IMPLICIT,
+                    message: 'confirm passwornd not match',
+                    error: {
+                        key: 'password_confirm',
+                        data: password_confirm
+                    }
+                }))
             }
 
             let checkUser = await schemas.User.findOne({where: {email}});
@@ -39,7 +88,10 @@ class User extends CrubAPI {
                 return res.send(ResponseTemplate.error({
                     code: ResponseCode.DATA_UNIQUE_IMPLICIT,
                     message: "email has been taken",
-                    error: null
+                    error: {
+                        key: 'email',
+                        data: email
+                    }
                 }));
             }
 

@@ -16,10 +16,10 @@ export class AppComponent implements OnInit {
     console.log(this.authen.account);
     if (this.authen.account) {
       if(this.authen.account.role == 'student') {
-        console.log('rediret to student')
+        console.log('rediret to student');
         this.router.navigateByUrl('/student')
-      } else {
-        console.log('rediret to master')
+      } else if(this.authen.account.role == 'master') {
+        console.log('rediret to master');
         this.router.navigateByUrl('/master')
       }
     } else {
@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
   }
 
   signOut() {
-    this.redirectToLogin();
     this.authen.clear();
+    this.redirectToLogin();
   }
   private redirectToLogin() {
     let link = "/login";

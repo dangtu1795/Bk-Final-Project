@@ -1,0 +1,11 @@
+.search-group {
+  border: 1px solid lightgrey;
+}
+
+.search-group > input, button {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  background-color: white;
+  outline: none;
+}

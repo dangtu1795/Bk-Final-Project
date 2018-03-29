@@ -14,5 +14,10 @@
       "port": 3306,
       "dialect": "mysql"
     }
+  },
+  "email": {
+    "username": "bkstreamingsystem@gmail.com",
+    "password": "bksystem",
+    "host": "smtp.gmail.com"
   }
 }

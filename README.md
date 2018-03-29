@@ -17,12 +17,14 @@
 ## How to use
 + Modify `config.json` for server config, ex: server port
 
-## Easiest way to run Postgres
+## Easiest way to run MySQl
 + Using docker:
 
 ```
 docker run -p 3306:3306 --name root -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bksystem -d mysql:5.6
 ```
+
++ Create new mysql database with name = bksystem, connection name = root, password = root
 One step to define your api: add .ts file in controllers/v1 to define your api. ex: localhost:3000/api/v1/user
 
 Happy Coding.

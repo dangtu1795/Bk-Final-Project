@@ -3,11 +3,18 @@ import { CommonModule } from '@angular/common';
 import { StudentComponent } from './student.component';
 import {RouterModule} from "@angular/router";
 import {YoutubePlayerModule} from "ngx-youtube-player";
+import { HeaderComponent } from './header/header.component';
 
 const studentRoute = [
   {
     path: 'student', component: StudentComponent,
     children: [
+      {
+        path: '', component: HeaderComponent
+      }
+      ,{
+        path: 'header', component: HeaderComponent
+      }
     ]
   }
 ];
@@ -19,6 +26,6 @@ const studentRoute = [
     RouterModule.forRoot(studentRoute),
     YoutubePlayerModule
   ],
-  declarations: [StudentComponent]
+  declarations: [StudentComponent, HeaderComponent]
 })
 export class StudentModule { }

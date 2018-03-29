@@ -6,13 +6,18 @@
 
 <div class="container">
   <img src="../../../assets/images/login.jpg" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-  <div class="form-signin" style="text-align: center; width: 60%; margin: auto">
-    <h3 class="form-signin-heading">Welcome</h3>
-    <br/>
-    <input type="text" id="email" name="email" placeholder="Email" [(ngModel)]="user.email"
-           class="form-control" /> <br/>
+  <form class="form-group" style="text-align: center; width: 60%; margin: auto">
+    <h3>Welcome</h3> <br>
+    <input type="text" name="email" placeholder="Email"
+           (ngModelChange)="onModelChange('email')"
+           [(ngModel)]="user.email" class="form-control">
+    <p class="text-danger text-left" *ngIf="errors['email']">{{errors['email']}}</p>
+    <br>
     <input type="password" placeholder="Password" [(ngModel)]="user.password"
-           id="password" name="password" class="form-control" /> <br />
-    <button class="btn btn-lg btn-primary btn-block" name="Submit" (click)="login()">Login</button>
-  </div>
+           (ngModelChange)="onModelChange('password')"
+           name="password" class="form-control">
+    <p class="text-danger text-left" *ngIf="errors['password']">{{errors['password']}}</p>
+    <br>
+    <button type="submit" class="btn btn-primary" style="width: 100%" name="Submit" (click)="login()">Login</button>
+  </form>
 </div>

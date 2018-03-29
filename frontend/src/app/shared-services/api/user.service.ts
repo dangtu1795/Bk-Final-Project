@@ -21,7 +21,7 @@ export class UserService{
     return this.http.post('login', data).toPromise();
   }
 
-  login1(formData) {
-    return this.http.postForm('login',formData).toPromise();
+  registration(data) {
+    return this.http.post('user', data).toPromise();
   }
 }
