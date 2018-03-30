@@ -29,7 +29,7 @@ export class StudentComponent implements OnInit {
   // videoId1 = 'ftJYyevC6Us';
   // videoId2 = 'ftJYyevC6Us';
 
-  videoId1 = 'ftJYyevC6Us';
+  videoId1 = 'Sd2S_dVOwq4';
   videoId2 = 'Sd2S_dVOwq4';
   player1;
   player2;
