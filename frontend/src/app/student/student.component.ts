@@ -1,4 +1,6 @@
 import {Component, OnInit, HostListener} from '@angular/core';
+import {AuthenticateService} from "../shared-services/authenticate.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -6,7 +8,6 @@ import {Component, OnInit, HostListener} from '@angular/core';
 })
 export class StudentComponent implements OnInit {
 
-  mouseEvent;
   PlayerState =
     {
       UNSTARTED: -1,
@@ -17,12 +18,6 @@ export class StudentComponent implements OnInit {
       CUED: 5
     };
 
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(e) {
-    this.mouseEvent = e;
-  }
-
-  containerWidth;
   playerOptions = {
     'fs': 0,
     'modestbranding': 1,
@@ -31,14 +26,17 @@ export class StudentComponent implements OnInit {
     'autohide': 1,
     'autoplay': 1
   };
-  videoId1 = 'ftJYyevC6Us';
-  videoId2 = 'ftJYyevC6Us';
+  // videoId1 = 'ftJYyevC6Us';
+  // videoId2 = 'ftJYyevC6Us';
+
+  videoId1 = 'Sd2S_dVOwq4';
+  videoId2 = 'Sd2S_dVOwq4';
   player1;
   player2;
 
   playStateButton = "../../assets/images/play.png";
 
-  constructor() {
+  constructor(private authen: AuthenticateService, private router: Router) {
   }
 
   ngOnInit() {
@@ -50,41 +48,56 @@ export class StudentComponent implements OnInit {
     } else {
       this.player2 = player;
     }
+
+    this.syncPlay(this.player1, this.player2);
   }
 
   onStateChange(event, id) {
+    console.log(event.data);
     if (event.data == this.PlayerState.PAUSED) {
       this.playStateButton = "../../assets/images/play.png";
       this.player1.pauseVideo();
       this.player2.pauseVideo();
     } else if (event.data == this.PlayerState.PLAYING) {
-      if(!this.player1 || !this.player2) {
-        console.log("return........")
-        return
-      }
       this.playStateButton = "../../assets/images/pause.png";
-      let player1CurrentTime = this.player1.getCurrentTime();
-      let player2CurrentTime = this.player2.getCurrentTime();
-      if (player1CurrentTime < player2CurrentTime) {
-        this.player1.playVideo();
-        setTimeout(() => {
-          this.player2.playVideo()
-        }, 1000 * (player2CurrentTime - player1CurrentTime));
-      } else {
-        this.player2.playVideo();
-        setTimeout(() => {
-          this.player1.playVideo()
-        }, 1000 * (player1CurrentTime - player2CurrentTime));
-      }
+     this.syncPlay(this.player1, this.player2);
+     this.player1.playVideo();
+     this.player2.playVideo();
+    }
+  }
+
+  syncPlay (player1, player2) {
+    if(!player1 || !player2) {
+      return;
+    }
+    console.log(player1.getCurrentTime(), player2.getCurrentTime())
+    let player1CurrentTime = player1.getCurrentTime();
+    let player2CurrentTime = player2.getCurrentTime();
+    if (player1CurrentTime < player2CurrentTime) {
+      player1.playVideo();
+      setTimeout(() => {
+        player2.playVideo();
+        console.log(player1.getCurrentTime(), player2.getCurrentTime())
+      }, 1000 * (player2CurrentTime - player1CurrentTime));
+    } else {
+      player2.playVideo();
+      setTimeout(() => {
+        player1.playVideo();
+        console.log(player1.getCurrentTime(), player2.getCurrentTime())
+      }, 1000 * (player1CurrentTime - player2CurrentTime));
     }
   }
 
   playFS(id) {
-    console.log("playing fullscreen: ", id)
-    if (id == this.PlayerState.PLAYING) {
-      this.player2.setPlaybackQuality('small')
+    let iframe;
+    if (id == 1) {
+      iframe = this.player1.getIframe();
     } else {
-      this.player1.setPlaybackQuality('small')
+      iframe = this.player2.getIframe();
+    }
+    let requestfullscreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    if (requestfullscreen) {
+      requestfullscreen.bind(iframe)()
     }
   }
 
@@ -108,6 +121,33 @@ export class StudentComponent implements OnInit {
       this.player1.playVideo();
       this.player2.playVideo();
     }, 1000)
+  }
+
+  funcRate(event) {
+    console.log(event.target.value)
+    let rate = event.target.value / 10;
+    let containerWidth = $('.screen').width();
+    if (event.target.value == 0) {
+      $('.column1').width(0);
+      $('.column2').width(containerWidth - 10)
+    } else if (event.target.value == 10) {
+      $('.column2').width(0);
+      $('.column1').width(containerWidth)
+    }
+    else {
+      $(".column1").width(rate * containerWidth - 5);
+      $(".column2").width((1 - rate) * containerWidth - 5);
+    }
+  }
+
+  funcResize() {
+    $('#customRate').val(5);
+    this.funcRate({target: {value: 5}})
+  }
+
+  logout() {
+    this.authen.clear();
+    this.router.navigateByUrl('/login')
   }
 
 }

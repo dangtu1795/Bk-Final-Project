@@ -14,6 +14,8 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes: Se
       User.hasOne(schemas.StudentProfile);
       User.hasOne(schemas.TeacherProfile);
       User.belongsTo(schemas.Image, {as: 'avatar'});
+      User.belongsTo(schemas.Faculty, {as: 'faculty'});
+      User.belongsTo(schemas.Major, {as: 'major'});
     };
 
     return User;

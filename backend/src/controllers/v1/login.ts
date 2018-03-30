@@ -5,28 +5,57 @@ import {ResponseCode} from "../../enums/response-code";
 import {schemas} from "../../schemas/index";
 import auth from "../../libs/auth"
 import misc from "../../libs/misc";
+import validateHelper from "../../helpers/validate-helper"
+import {PasswordConstraint, EmailConstraints} from "../../helpers/validate-contraints";
 
+const listConstraints = {
+    "email": {
+        validates: [...EmailConstraints]
+    },
+    "password": {
+        validates: [...PasswordConstraint]
+    },
+}
 
 class Login extends CrubAPI {
     async create(req: Request, res: Response) {
         try {
             let {email, password} = req.body;
+
+            let valid = validateHelper.runValidatingObject({email, password}, listConstraints);
+            if (valid) {
+                return res.send(ResponseTemplate.error({
+                    code: ResponseCode.INPUT_DATA_NULL,
+                    message: valid.message,
+                    error: {
+                        key: valid.key,
+                        data: valid.data
+                    }
+                }));
+            }
+
             let user = await schemas.User.findOne({
                 where: {email}
-            });gu
+            });
             if (!user) {
                 return res.send(ResponseTemplate.error({
                         code: ResponseCode.DATA_NOT_FOUND,
                         message: "email not found",
-                        error: null
+                        error: {
+                            key: 'email',
+                            data: email
+                        }
                     }
                 ));
             }
             if(user.password !== misc.sha256(password)){
                 return res.send(ResponseTemplate.error({
                         code: ResponseCode.DATA_NOT_FOUND,
-                        message: "email not found",
-                        error: null
+                        message: "wrong password",
+                        error: {
+                            key: 'password',
+                            data: password
+                        }
                     }
                 ));
             }

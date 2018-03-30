@@ -2,7 +2,7 @@
 ## Technology Stack
 + NodeJS
 + Express 4.x
-+ Postgres 9.x
++ Mysql 5.6
 + Typescript 2.x
 + Docker
 
@@ -17,17 +17,16 @@
 ## How to use
 + Modify `config.json` for server config, ex: server port
 
-## Easiest way to run Postgres
+## Easiest way to run MySQl
 + Using docker:
 
 ```
 docker run -p 3306:3306 --name root -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bksystem -d mysql:5.6
 ```
+
++ Create new mysql database with name = bksystem, connection name = root, password = root
 One step to define your api: add .ts file in controllers/v1 to define your api. ex: localhost:3000/api/v1/user
 
-Happy Coding.
-
-    
  
 # Frontend
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0.
@@ -44,3 +43,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+Happy Coding.

@@ -13,7 +13,7 @@ export class AuthenticateService {
   public authenInfo: Subject<any> = new Subject();
 
   constructor(private utilService: UtilService) {
-    this.__secretCode = utilService.encodeBase64('enter secret text here');
+    this.__secretCode = utilService.encodeBase64('Secret_Code_For_BK_SYSTEM');
     this.load();
   }
 

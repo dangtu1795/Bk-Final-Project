@@ -1,68 +1,4 @@
-<!--<div id="content">-->
-<!--<div class="menu-trigger"></div>-->
-<!--<h1 style="margin-left: 30%; ">Hệ Thống Học Tập Trực Tuyến</h1>-->
-
-<!--<nav id="slide-menu">-->
-<!--<ul>-->
-
-<!--<a class="timeline" style = "text-decoration: none;">-->
-<!--<li class="timeline">Home</li>-->
-<!--</a>-->
-<!--<a class="timeline"style = "text-decoration: none;">-->
-<!--<li class="events">Video Page</li>-->
-<!--</a>-->
-<!--<a class="timeline" style = "text-decoration: none;">-->
-<!--<li class="calendar">Question Page</li>-->
-<!--</a>-->
-<!--<a class="timeline" style = "text-decoration: none;">-->
-<!--<li class="sep settings">Settings</li>-->
-<!--</a>-->
-<!--<a class="timeline"  style = "text-decoration: none;">-->
-<!--<li class="logout">Login</li>-->
-<!--</a>-->
-<!--<a class="timeline"style = "text-decoration: none;">-->
-<!--<li class="logout">Account</li>-->
-<!--</a>-->
-<!--<a class="timeline" style = "text-decoration: none;">-->
-<!--<li class="logout">Video on Demain</li>-->
-<!--</a>-->
-<!--</ul>-->
-<!--</nav>-->
-
-<!--<div class="column1" id="video1Div">-->
-<!--<div class="frameOverlay left"></div>-->
-<!--<div id="player1" class="gallery-box"></div>-->
-<!--</div>-->
-
-<!--<div class="column2" id="video2Div">-->
-<!--<div class="frameOverlay right"></div>-->
-<!--<div id="player2" class="gallery-box"></div>-->
-<!--</div>-->
-
-<!--<input type="image" width="48" height="48" src="../../assets/images/full.png" id="video1FullscreenButton"-->
-<!--style="margin-left:24%; margin-top: 430px; position: absolute;">-->
-<!--<input type="image" width="48" height="48" src="../../assets/images/full.png" id="video2FullscreenButton"-->
-<!--style="margin-left:74%; margin-top: 430px; position: absolute;">-->
-<!--<input type="image" width="48" height="48" src="../../assets/images/pause.png" id="playButton"-->
-<!--style="margin-left:48%; margin-top: 430px; position: absolute;">-->
-<!--<input class="ps1" type="range" value="100" max="100" step="1" id="customSeekBar"-->
-<!--style="margin-left:2%; margin-top: 480px; position: absolute; width: 95%;">-->
-
-<!--&lt;!&ndash; custom player &ndash;&gt;-->
-<!--<h3 style="margin-left:2%; margin-top: 520px; position: absolute;"><i>Custom Player</i></h3>-->
-<!--<input class="ps2" type="range" value="5" max="10" step="1"-->
-<!--style="color: green; width: 25%; position: absolute; margin-top: 540px;  left: 20%;" onchange="funcRate()"-->
-<!--id="customRate">-->
-<!--<input src="../../assets/images/return.png" type="image" onclick="funcResize(1)"-->
-<!--style=" margin-right: 5%; width: 100px; height: 50px; margin-top:560px; position: absolute; left: 20%; ">-->
-
-
-<!--<div class="footer">-->
-<!--<p>Bản Quyền Thuộc <b>GVLab</b></p>-->
-<!--</div>-->
-
-<!--</div>-->
-
+<app-header></app-header>
 <h1 style="margin-left: 30%; ">Hệ Thống Học Tập Trực Tuyến</h1>
 
 <div class="container">
@@ -99,4 +35,14 @@
   <div class="seekbar" style="width: 100%">
     <input class="ps1" type="range" value="100" max="100" step="1" id="custom-progress" (change)="changeProgress($event)">
   </div>
+
+  <div class="text-right">
+    <h3 style="display: inline-block; padding-right: 30px" class="text-left"><i>Custom Player:</i></h3>
+    <div class="custom-size" style="display: inline-flex; vertical-align: middle">
+      <input src="../../assets/images/return.png" type="image" (click)="funcResize()" style=" margin-right: 5%; width: 100px; height: 50px;left: 20%; " >
+      <input class="ps2" type="range" value="5" max="10" step="1"  style="color: green;" (change)="funcRate($event)" id="customRate">
+    </div>
+  </div>
+  <router-outlet></router-outlet>
 </div>
+
