@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-course-detail',
@@ -7,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
 
+  }
+
+  setLayout(event) {
+    let element = event.target.parentElement;
+    $(element).addClass("active").siblings(".active").removeClass("active");
+    $(element).parent().parent().siblings(".panel-block").attr("class", "panel-block video-list").addClass($(element).attr("rel"));
+    return false;
   }
 
 }

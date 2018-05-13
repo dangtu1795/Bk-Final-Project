@@ -14,15 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.authen.account);
-    if (this.authen.account) {
-      if(this.authen.account.role == 'student') {
-        console.log('rediret to student');
-        this.router.navigateByUrl('/student')
-      } else if(this.authen.account.role == 'master') {
-        console.log('rediret to master');
-        this.router.navigateByUrl('/master')
-      }
-    } else {
+    if (!this.authen.account) {
       this.redirectToLogin();
     }
   }

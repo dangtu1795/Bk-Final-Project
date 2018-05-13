@@ -12,4 +12,10 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
   }
 
+  setLayout(event) {
+    let element = event.target.parentElement;
+    $(element).addClass("active").siblings(".active").removeClass("active");
+    $(element).parent().parent().siblings(".panel-block").attr("class", "panel-block video-list").addClass($(element).attr("rel"));
+    return false;
+  }
 }

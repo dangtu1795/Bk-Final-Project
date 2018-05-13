@@ -12,6 +12,15 @@ export class MasterComponent implements OnInit {
   constructor(private router: Router, private authen: AuthenticateService) { }
 
   ngOnInit() {
+    if(this.authen.account.role !== 'master') {
+      this.router.navigateByUrl('/student')
+    }
+
+    $(".ot-search-field").focus(function(){
+      $("#main-menu").addClass("minify-menu");
+    }).blur(function(){
+      $("#main-menu").removeClass("minify-menu");
+    });
   }
 
   logout() {

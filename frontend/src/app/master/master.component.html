@@ -1,106 +1,27 @@
-<div class="boxed">
-
+<div class="boxed" style="margin-top: -15px">
     <!-- BEGIN .header -->
     <header class="header light">
-
-        <div class="header-upper">
-            <!-- BEGIN .wrapper -->
-            <div class="wrapper">
-                <ul class="left ot-menu-add" rel="Top Menu">
-                    <li><a><span>Homepage</span></a>
-                        <ul>
-                            <li><a>Homepage (Slider / Dark)</a></li>
-                            <li><a>Homepage (Slider / Light)</a></li>
-                            <li><a>Homepage (No slider / Dark)</a></li>
-                            <li><a>Homepage (No slider / Light)</a></li>
-                        </ul>
-                    </li>
-                    <li><a><span>Video Post</span></a>
-                        <ul>
-                            <li><a><span>Self Hosted (html5)</span></a>
-                                <ul>
-                                    <li><a>Video With Slider</a></li>
-                                    <li><a>Video Without Slider</a></li>
-                                    <li><a>Video Without Comments</a></li>
-                                    <li><a>Video Without Sidebar</a></li>
-                                    <li><a>Video Sidebar on left side</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Self Hosted (JW Player)</a></li>
-                            <li><a><span>Video From Vine</span></a>
-                                <ul>
-                                    <li><a>Video From Vine (embed)</a></li>
-                                    <li><a>Video From Vine (html5)</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Video From YouTube</a></li>
-                            <li><a>Video From Vimeo</a></li>
-                            <li><a>Video From DailyMotion</a></li>
-                            <li><a>Video From Twitch.tv</a></li>
-                        </ul>
-                    </li>
-                    <li><a><span>Browse</span></a>
-                        <ul>
-                            <li><a>Layout #1 (1 video in row)</a></li>
-                            <li><a>Layout #2 (1 video in row HQ)</a></li>
-                            <li><a>Layout #3 (2 videos in row)</a></li>
-                            <li><a>Layout #4 (3 videos in row)</a></li>
-                            <li><a>Layout #5 (No Sidebar)</a></li>
-                        </ul>
-                    </li>
-                    <li><a>Sample Page</a></li>
-                    <li><a>Full Width Page</a></li>
-                    <li><a>Error 404</a></li>
-                    <li><a target="_blank"><strong>Buy On Themeforest</strong></a></li>
-                </ul>
-                <ul class="right">
-                    <li><a><i class="fa fa-facebook"></i></a></li>
-                    <li><a><i class="fa fa-twitter"></i></a></li>
-                    <li><a><i class="fa fa-google-plus"></i></a></li>
-                    <li><a><i class="fa fa-youtube-play"></i></a></li>
-                    <li><a><i class="fa fa-vimeo-square"></i></a></li>
-                </ul>
-                <div class="clear-float"></div>
-                <!-- END .wrapper -->
-            </div>
-        </div>
-
         <!-- BEGIN .wrapper -->
         <div class="wrapper">
-
-            <!-- BEGIN .header-content -->
-            <div class="header-content">
-                <div class="header-logo">
-                    <a><img src="../../assets/images/header-logo-light.png" width="467" height="60"
-                            alt=""/></a>
-                </div>
-                <div class="header-banner">
-                    <a target="_blank"><img src="../../assets/images/no-banner-468x60-light.jpg" width="468"
-                                            height="60" alt=""/></a>
-                </div>
-                <!-- END .header-content -->
-            </div>
-
             <!-- BEGIN #main-menu -->
             <nav id="main-menu">
                 <div class="search-head">
-                    <form action="http://videomag.orange-themes.com/html/browse.html">
+                    <div >
                         <input type="text" class="ot-search-field" value=""/>
                         <input type="submit" class="ot-search-button" value="Search"/>
-                    </form>
+                    </div>
                 </div>
                 <ul class="top-menu ot-menu-add" rel="Main Menu">
-                    <li><a>Homepage<i>With Slider/Dark</i></a></li>
-                    <li><a><span>Shortcodes<i>Theme Features</i></span></a>
-                        <ul>
-                            <li><a>Image With Caption</a></li>
-                            <li><a>Responsive Video Embeds</a></li>
-                            <li><a>Spacer Styles</a></li>
-                            <li><a>Buttons</a></li>
-                        </ul>
-                    </li>
-                    <li class="mega-menu-full"><a
-                    ><span>Music Videos<i>Music Related Stuff</i></span></a>
+                    <li><a routerLink="/master/courses">My Course<i>All courses</i></a></li>
+                    <!--<li><a href=""><span>Shortcodes<i>Theme Features</i></span></a>-->
+                        <!--<ul>-->
+                            <!--<li><a href="">Image With Caption</a></li>-->
+                            <!--<li><a href="">Responsive Video Embeds</a></li>-->
+                            <!--<li><a href="">Spacer Styles</a></li>-->
+                            <!--<li><a href="">Buttons</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                    <li class="mega-menu-full"><a>Most Viewed<span><i>Most Interactive</i></span></a>
                         <ul class="sub-menu">
                             <li>
                                 <ul class="menu-blocks paragraph-row">
@@ -177,16 +98,7 @@
                     </li>
 
 
-                    <li><a>Contact Us<i>Meet Our Team</i></a></li>
-                </ul>
-                <ul class="bottom-menu ot-menu-add" rel="Categories">
-                    <li><a>Conclusionemque</a></li>
-                    <li><a>Creative</a></li>
-                    <li><a>Entertainment</a></li>
-                    <li><a>Nonprofit</a></li>
-                    <li><a>Technology</a></li>
-                    <li><a>Wedding</a></li>
-                    <li><a>BBpress</a></li>
+                    <li><a (click)="logout()">Logout<i>Happy Learning</i></a></li>
                 </ul>
                 <!-- END #main-menu -->
             </nav>
@@ -202,38 +114,27 @@
 
         <!-- BEGIN .wrapper -->
         <div class="wrapper">
-
             <!-- BEGIN .with-sidebar-layout -->
             <router-outlet></router-outlet>
-
             <!-- END .wrapper -->
         </div>
 
         <!-- BEGIN .content -->
     </section>
 
-    <!-- BEGIN .footer -->
-    <footer class="footer">
-
-    </footer>
-
     <div class="footer-bottom">
 
         <!-- BEGIN .wrapper -->
         <div class="wrapper">
-            <ul class="right">
-                <li><a>Home</a></li>
-                <li><a>Browse</a></li>
-                <li><a>Popular</a></li>
-                <li><a>Sample Page</a></li>
-                <li><a>Contact Us</a></li>
-            </ul>
-            <p>&copy; 2014 Copyright <b>VideoMag</b> theme. All Rights reserved. <a><b>Buy this
-                theme on themeforest</b></a></p>
-            <!-- END .wrapper -->
+            <!--<ul class="right">-->
+                <!--<li><a>Home</a></li>-->
+                <!--<li><a>Browse</a></li>-->
+                <!--<li><a>Popular</a></li>-->
+                <!--<li><a>Sample Page</a></li>-->
+                <!--<li><a>Contact Us</a></li>-->
+            <!--</ul>-->
+            <p>&copy; 2018 Copyright <b>TuVu</b> All Rights reserved.</p>
         </div>
 
     </div>
-
-    <!-- END .boxed -->
 </div>

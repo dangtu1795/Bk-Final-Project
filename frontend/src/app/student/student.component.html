@@ -10,7 +10,7 @@
         [videoId]="videoId1"
         [playerVars]="playerOptions"
         (ready)="savePlayer($event,1)"
-        (change)="onStateChange($event,1)">
+        (change)="onStateChange($event)">
       </youtube-player>
 
     </div>
@@ -22,7 +22,7 @@
         [videoId]="videoId2"
         [playerVars]="playerOptions"
         (ready)="savePlayer($event,2)"
-        (change)="onStateChange($event,2)">
+        (change)="onStateChange($event)">
       </youtube-player>
     </div>
   </div>
@@ -33,7 +33,7 @@
     <input style="position: absolute; left: 48%;" type="image" width="48" height="48" [src]="playStateButton" (click)="togglePlay()">
   </div>
   <div class="seekbar" style="width: 100%">
-    <input class="ps1" type="range" value="100" max="100" step="1" id="custom-progress" (change)="changeProgress($event)">
+    <input class="ps1" type="range" value="0" max="100" step="1" id="custom-progress" (change)="changeProgress($event)">
   </div>
 
   <div class="text-right">

@@ -1,5 +1,4 @@
-
-<div >
+<div>
   <button class="btn btn-md btn-warning btn-block" (click)="gotoLogin()">Go To Login Page</button>
 </div>
 
@@ -28,7 +27,8 @@
 
         <div class="form-group">
           <div class="col-sm-9">
-            <input type="text" placeholder="Gender" class="form-control" [(ngModel)]="user.gender">
+            <input type="radio" value="male" name="gender" [(ngModel)]="user.gender"> Male
+            <input type="radio" value="female" name="gender" [(ngModel)]="user.gender"> Female
           </div>
         </div>
 

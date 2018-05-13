@@ -21,16 +21,21 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.authen.token){
+      this.router.navigateByUrl('/student')
+    }
   }
 
   async login() {
+    console.log(this.user);
     let res = await this.userService.login(this.user);
+    console.log(res);
     if (res.success) {
       if (['student', 'master'].indexOf(res.data.role) < 0) {
         return alert('Account is not valid, Please try another');
       }
       let account = res.data;
-      let token = account.token;
+      let token = res.token;
       this.authen.updateInfo(token, account);
       if (res.data.role == 'student') {
         this.router.navigateByUrl('/student')

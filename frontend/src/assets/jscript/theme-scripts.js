@@ -3,13 +3,13 @@
 	"use strict";
 
 	jQuery(window).ready(function() {
-		
+
 		// Search on focus - minify menu spaces
-		jQuery(".ot-search-field").focus(function(){
-			jQuery("#main-menu").addClass("minify-menu");
-		}).blur(function(){
-			jQuery("#main-menu").removeClass("minify-menu");
-		});
+		// jQuery(".ot-search-field").focus(function(){
+		// 	jQuery("#main-menu").addClass("minify-menu");
+		// }).blur(function(){
+		// 	jQuery("#main-menu").removeClass("minify-menu");
+		// });
 
 
 		// Video slider settings
@@ -126,15 +126,15 @@
 
 				jQuery(".otplayer").parent().addClass("showcontrols");
 
-				var currentSeconds = (Math.floor(element[0].currentTime % 60) < 10 ? '0' : '') + Math.floor(element[0].currentTime % 60); 
-				var currentMinutes = Math.floor(element[0].currentTime / 60); 
+				var currentSeconds = (Math.floor(element[0].currentTime % 60) < 10 ? '0' : '') + Math.floor(element[0].currentTime % 60);
+				var currentMinutes = Math.floor(element[0].currentTime / 60);
 
 				element.siblings(".otplayer-controls").find('.ot-inline-time').html(currentMinutes + ":" + currentSeconds);
 
 				var percentageOfSong = (element[0].currentTime/element[0].duration);
 				var percentageOfSlider = element.siblings(".otplayer-controls").find('.ot-inline-slider')[0].offsetWidth * percentageOfSong;
 
-				element.siblings(".otplayer-controls").find('.ot-inline-slider > div').css("width", Math.round(percentageOfSlider) + "px"); 
+				element.siblings(".otplayer-controls").find('.ot-inline-slider > div').css("width", Math.round(percentageOfSlider) + "px");
 
 			}, false);
 

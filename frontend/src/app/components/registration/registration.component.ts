@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
     email: '',
     password: '',
     password_confirm: '',
-    gender: '',
+    gender: 'male',
     role: ''
   };
 
@@ -32,6 +32,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   async registation() {
+    console.log(this.user)
     let res = await this.userService.registration(this.user);
     if(res.success) {
       this.gotoLogin();

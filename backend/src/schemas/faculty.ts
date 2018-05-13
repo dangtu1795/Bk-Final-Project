@@ -5,5 +5,8 @@ export default function defineFaculty(sequelize: Sequelize.Sequelize, DataTypes:
         title: DataTypes.STRING
     });
 
+    Faculty.associate = function (schemas) {
+    };
+
     return Faculty;
 }
