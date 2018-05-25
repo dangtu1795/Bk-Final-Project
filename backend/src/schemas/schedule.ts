@@ -16,7 +16,7 @@ export default function defineSchedule(sequelize: Sequelize.Sequelize, DataTypes
     });
 
     Schedule.associate = function (schemas) {
-        Schedule.belongsToMany(schemas.HourOfDate, {as: 'hour', through: 'ScheduleHour'});
+        Schedule.belongsToMany(schemas.HourOfDay, {as: 'hour', through: 'ScheduleHour'});
     };
 
     return Schedule;

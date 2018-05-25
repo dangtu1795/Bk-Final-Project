@@ -24,4 +24,8 @@ export class UserService{
   registration(data) {
     return this.http.post('user', data).toPromise();
   }
+
+  getLecture() {
+    return this.http.get('lecture').toPromise();
+  }
 }

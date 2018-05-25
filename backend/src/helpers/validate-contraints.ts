@@ -4,7 +4,7 @@ import validator from "./validate-helper"
 export const EmailConstraints = [
   {
     check: (variable) => {
-      return validator.isEmail(variable)
+      return validator.isEmail(variable + '')
     },
     error: "is not valid."
   }
@@ -13,7 +13,7 @@ export const EmailConstraints = [
 export const NameConstraint = [
   {
     check: (variable) => {
-      return validator.isLength(variable, {max: 40})
+      return validator.isLength(variable + '', {max: 40})
     },
     error: "following are allowed: a-z, A-Z, 0-9, and common punctuation., with a maximum of 40 characters.",
   }
@@ -36,7 +36,7 @@ export const PhoneConstraints = [
 export const PasswordConstraint = [
   {
     check: (variable) => {
-      return validator.isLength(variable, {min: 6, max: 32})
+      return validator.isLength(variable + '', {min: 6, max: 32})
     },
     error: "must have at least 6 characters and maximum of 32 characters",
   },

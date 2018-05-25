@@ -37,10 +37,9 @@ export default class App {
 
         let router = express.Router();
         // placeholder route handler
-        router.get('/', (req, res, next) => {
-            res.json({
-                message: 'Hello World!'
-            });
+        this.express.use(express.static(path.join(__dirname, 'public')));
+        router.get('/*', function (req, res) {
+            return res.sendFile(path.join(__dirname, '/public/index.html'));
         });
         this.express.use('/', router);
         this.express.use('/api/v1', appRouter);

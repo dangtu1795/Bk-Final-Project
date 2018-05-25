@@ -1,6 +1,7 @@
 import {authenticate} from "../auth"
 import * as v1 from '../controllers/v1';
-var express = require("express");
+const express = require("express");
+const path = require('path');
 
 
 let routes = express.Router();
@@ -16,5 +17,18 @@ for (let key of Object.keys(v1)) {
     routes.delete(`/${key}:id?`, api.destroy);
 
 }
+
+routes.get('/login', function (req, res) {
+    return res.sendFile(path.join(__dirname, '..', '/public/index.html'));
+});
+
+routes.get('/student/*', function (req, res) {
+    return res.sendFile(path.join(__dirname, '..', '/public/index.html'));
+});
+
+routes.get('/master/*', function (req, res) {
+    return res.sendFile(path.join(__dirname, '..', '/public/index.html'));
+});
+
 
 module.exports = routes;

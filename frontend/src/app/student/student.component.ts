@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthenticateService} from "../shared-services/authenticate.service";
 import {Router} from "@angular/router";
 import {Subject} from "rxjs";
+import {UserService} from "../shared-services/api/user.service";
 
 @Component({
   selector: 'app-student',
@@ -43,11 +44,14 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   playStateButton = "../../assets/images/play.png";
 
-  constructor(private authen: AuthenticateService, private router: Router) {
+  constructor(private authen: AuthenticateService, private router: Router, private userService: UserService) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    let res = await this.userService.getLecture();
+    this.videoId1 = res.data.videoUrl;
+    this.videoId2 = res.data.slideUrl;
     if (this.authen.account.role !== 'student') {
       this.router.navigateByUrl('/master')
     }
@@ -70,11 +74,13 @@ export class StudentComponent implements OnInit, OnDestroy {
   savePlayer(player, id) {
     if (id == 1) {
       this.player1 = player;
+      this.player1.loadVideoById(this.videoId1);
       let duration = this.player1.getDuration();
       this.step.next(10 * duration);
 
     } else {
       this.player2 = player;
+      this.player2.loadVideoById(this.videoId2);
     }
 
     this.syncPlay();

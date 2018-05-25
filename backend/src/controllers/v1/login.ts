@@ -21,9 +21,11 @@ class Login extends CrubAPI {
     async create(req: Request, res: Response) {
         try {
             let {email, password} = req.body;
-
+            console.log(req.body)
+            console.log(email, password)
             let valid = validateHelper.runValidatingObject({email, password}, listConstraints);
             if (valid) {
+                console.log(valid)
                 return res.send(ResponseTemplate.error({
                     code: ResponseCode.INPUT_DATA_NULL,
                     message: valid.message,
