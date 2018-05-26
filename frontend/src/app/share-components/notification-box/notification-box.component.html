@@ -1,0 +1,16 @@
+<div class="notification-box" [ngStyle]="{'display': show ? 'block' : 'none'}">
+  <h3>Notifications</h3>
+  <div style="height:249px;" class="noti-container">
+    <ul>
+      <a >
+        <li class="noti-item"
+        (click)="notiClicked(noti)"
+          *ngFor="let noti of notis.asArray()">
+          <span [innerHTML]="noti.rich_title | safeHtml" [ngClass]="!noti.read? 'text-skype-blue':'noti-content'" style="font-size: 12px;"></span>
+          <span class="noti-time">{{noti.created_at | timeAgo}}</span>
+        </li>
+      </a>
+    </ul>
+  </div>
+  <div class="seeAll"><a routerLink="/merchant/notification">See All</a></div>
+</div>
