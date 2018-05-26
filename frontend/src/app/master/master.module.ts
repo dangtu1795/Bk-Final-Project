@@ -6,6 +6,9 @@ import {CoursesComponent} from './courses/courses.component';
 import {CourseDetailComponent} from './course-detail/course-detail.component';
 import {WatchCourseDetailComponent} from './watch-course-detail/watch-course-detail.component';
 import {QuestionComponent} from './question/question.component';
+import { ClassComponent } from './class/class.component';
+import { CourseNewComponent } from './course-new/course-new.component';
+import { ClassNewComponent } from './class-new/class-new.component';
 
 
 const masterModule = [
@@ -40,7 +43,7 @@ const masterModule = [
         CommonModule,
         RouterModule.forRoot(masterModule)
     ],
-    declarations: [MasterComponent, CoursesComponent, CourseDetailComponent, WatchCourseDetailComponent, QuestionComponent]
+    declarations: [MasterComponent, CoursesComponent, CourseDetailComponent, WatchCourseDetailComponent, QuestionComponent, ClassComponent, CourseNewComponent, ClassNewComponent]
 })
 export class MasterModule {
 }
