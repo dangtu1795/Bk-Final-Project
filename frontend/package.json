@@ -25,6 +25,7 @@
     "@types/youtube": "0.0.32",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.2",
+    "socket.io-client": "^2.1.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

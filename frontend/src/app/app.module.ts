@@ -15,6 +15,7 @@ import {RouterModule} from "@angular/router";
 import {StudentModule} from "./student/student.module";
 import {MasterModule} from "./master/master.module";
 import {YoutubePlayerModule} from "ngx-youtube-player";
+import {SocketService} from "./shared-services/socket.service";
 
 const appRoutes = [
   {
@@ -46,7 +47,7 @@ const appRoutes = [
     StudentModule,
     MasterModule
   ],
-  providers: [UtilService, LocalStorageService, HttpService, UserService, AuthenticateService],
+  providers: [UtilService, LocalStorageService, HttpService, UserService, AuthenticateService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

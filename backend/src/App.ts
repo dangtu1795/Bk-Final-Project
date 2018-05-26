@@ -4,7 +4,6 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as debug from 'debug';
-import * as appRouter from './routes/index'
 
 var port;
 require("./libs/extend");
@@ -34,15 +33,10 @@ export default class App {
 
 
     private routes(options): void {
-
-        let router = express.Router();
         // placeholder route handler
-        this.express.use(express.static(path.join(__dirname, 'public')));
-        router.get('/*', function (req, res) {
-            return res.sendFile(path.join(__dirname, '/public/index.html'));
-        });
+        var router = require('./routes/index');
         this.express.use('/', router);
-        this.express.use('/api/v1', appRouter);
+        this.express.use(express.static(path.join(__dirname, 'public')));
     }
 
     private initServer(options) {

@@ -14,15 +14,8 @@ export class SocketService {
   private _listener = {};
   jwt: any;
 
-
-  onNewMessage = new Subject<any>();
-  onRoomCreated = new Subject<any>();
-  onRoomUpdated = new Subject<any>();
-  onProfileUpdated = new Subject<any>();
   onNotiCreated = new Subject<any>();
   onNotiUpdated = new Subject<any>();
-  onMessageTyping = new Subject<any>();
-  onMessageEndTyping = new Subject<any>();
 
   constructor(private authenService: AuthenticateService) {
     try {
@@ -67,30 +60,13 @@ export class SocketService {
       let rs = await this.emit('login', {});
     });
 
-    this.register("MESSAGE_CREATED", (data) => {
-      this.onNewMessage.next(data);
-    });
-    this.register("ROOM_CREATED", data => {
-      this.onRoomCreated.next(data);
-    });
-    this.register("ROOM_UPDATED", data => {
-      this.onRoomUpdated.next(data);
-    });
-    this.register("PROFILE_UPDATED", data => {
-      this.onProfileUpdated.next(data);
-    });
     this.register("NOTI_CREATED", data => {
       this.onNotiCreated.next(data);
     });
     this.register("NOTI_UPDATED", data => {
       this.onNotiUpdated.next(data);
     })
-    this.register("MESSAGE_TYPING", data => {
-      this.onMessageTyping.next(data);
-    })
-    this.register("MESSAGE_END_TYPING", data => {
-      this.onMessageEndTyping.next(data);
-    })
+
   }
 
   disconnectSocket() {
@@ -119,9 +95,6 @@ export class SocketService {
     });
   }
 
-  async getNews() {
-    return this.emit("GET news", {});
-  }
 
   async getNoti(pagination?: any) {
     let _pagination = Object.assign({}, pagination || {});

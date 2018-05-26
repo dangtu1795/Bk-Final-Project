@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../shared-services/api/user.service";
 import {AuthenticateService} from "../../shared-services/authenticate.service";
 import {Router} from "@angular/router";
+import {SocketService} from "../../shared-services/socket.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,10 @@ export class LoginComponent implements OnInit {
 
   errors = {};
 
-  constructor(private userService: UserService, private authen: AuthenticateService, private router: Router) {
+  constructor(private userService: UserService,
+              private socketService: SocketService,
+              private authen: AuthenticateService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -37,6 +41,7 @@ export class LoginComponent implements OnInit {
       let account = res.data;
       let token = res.token;
       this.authen.updateInfo(token, account);
+      this.socketService.connectSocket();
       if (res.data.role == 'student') {
         this.router.navigateByUrl('/student')
       } else {

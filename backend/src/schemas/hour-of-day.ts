@@ -11,7 +11,7 @@ export default function defineHourOfDay(sequelize: Sequelize.Sequelize, DataType
     var HourOfDay = sequelize.define('HourOfDay', {
         start: DataTypes.INTEGER,
         end: DataTypes.INTEGER,
-        day_num: DataTypes.INTEGER
+        day_num: DataTypes.INTEGER,
     });
 
     HourOfDay.associate = function (schemas) {

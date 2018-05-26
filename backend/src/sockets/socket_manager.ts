@@ -1,4 +1,4 @@
-import socketCode from "enums/event-code";
+import socketCode from '../enums/event-code';
 export class SocketManager {
   private clients = {};
 

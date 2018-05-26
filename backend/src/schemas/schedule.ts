@@ -12,7 +12,27 @@ export default function defineSchedule(sequelize: Sequelize.Sequelize, DataTypes
     var Schedule = sequelize.define('Schedule', {
         title: DataTypes.STRING,
         from: DataTypes.DATE,
-        to: DataTypes.DATE
+        to: DataTypes.DATE,
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    }, {
+        defaultScope: {
+            where: {
+                active: true
+            }
+        }, scopes: {
+            deleted: {
+                where: {
+                    deleted: true
+                }
+            }
+        }
     });
 
     Schedule.associate = function (schemas) {

@@ -8,6 +8,26 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes: Se
         phone: DataTypes.STRING,
         gender: DataTypes.STRING,
         role: DataTypes.ENUM('admin', 'master', 'student'),
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    }, {
+        defaultScope: {
+            where: {
+                active: true
+            }
+        }, scopes: {
+            deleted: {
+                where: {
+                    deleted: true
+                }
+            }
+        }
     });
 
     User.associate = function (schemas) {

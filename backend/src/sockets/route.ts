@@ -1,6 +1,6 @@
-import auth from "libs/auth";
-import socketManager from "sockets/socket_manager";
-import {ResponseCode} from "enums/response-code";
+import auth from "../libs/auth";
+import socketManager from "../sockets/socket_manager";
+import {ResponseCode} from "../enums/response-code";
 
 var controller = require("sockets/controllers");
 var eventEmitter = require("events/event-emitter");

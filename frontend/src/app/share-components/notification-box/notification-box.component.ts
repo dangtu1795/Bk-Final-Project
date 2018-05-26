@@ -32,12 +32,12 @@ export class NotificationBoxComponent implements OnInit {
   async notiClicked(noti) {
     await this.socketService.readNoti(noti.id);
     let data = noti.data;
-    switch (noti.type) {
-      case 'job':
-        this.router.navigateByUrl(`/merchant/my-job/job-detail/${data.job_id}`);
+    switch (noti.role) {
+      case 'student':
+        this.router.navigateByUrl(`/master/course/${data.course_id}/${data.class_id}`);
         break;
-      case 'sys':
-        this.router.navigateByUrl(`merchant/profile/promotion-code`);
+      case 'master':
+        this.router.navigateByUrl(`/student/course/${data.course_id}/${data.class_id}`);
         break;
     }
   }

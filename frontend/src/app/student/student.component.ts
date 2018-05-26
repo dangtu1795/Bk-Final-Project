@@ -40,7 +40,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   step: Subject<any> = new Subject();
   isRunning = true;
   isEnded = false;
-  MAX_DELAY = 0.01;
+  MAX_DELAY = 1;
 
   playStateButton = "../../assets/images/play.png";
 
@@ -81,6 +81,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     } else {
       this.player2 = player;
       this.player2.loadVideoById(this.videoId2);
+      this.player2.mute();
     }
 
     this.syncPlay();

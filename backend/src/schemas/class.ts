@@ -1,11 +1,10 @@
 import * as Sequelize from "sequelize"
 
-export default function defineLecture(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
-    var Lecture = sequelize.define("Lecture", {
-        title: DataTypes.STRING,
-        slideUrl: DataTypes.STRING,
-        videoUrl: DataTypes.STRING,
-        exUrl: DataTypes.STRING,
+export default function defineClass(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    var Class = sequelize.define("Class", {
+        name: DataTypes.STRING,
+        capacity: DataTypes.INTEGER,
+        note: DataTypes.TEXT,
         active: {
             type: DataTypes.BOOLEAN,
             defaultValue: true
@@ -28,9 +27,10 @@ export default function defineLecture(sequelize: Sequelize.Sequelize, DataTypes:
         }
     });
 
-    Lecture.associate = function (schemas) {
-      Lecture.belongsTo(schemas.Course);
+    Class.associate = function (schemas) {
+        Class.hasMany(schemas.Lecture);
+        Class.belongsTo(schemas.Schedule);
     };
 
-    return Lecture;
+    return Class;
 }

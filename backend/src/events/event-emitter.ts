@@ -1,4 +1,4 @@
-import EventCode from "enums/event-code";
+import EventCode from "../enums/event-code";
 
 var events = require('events');
 const event = new events.EventEmitter();

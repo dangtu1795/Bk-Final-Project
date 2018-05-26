@@ -1,8 +1,6 @@
 import * as path from "path";
-import {schemas} from "schemas";
-import oneSignalEndUsers from "libs/one_signal_end_users";
-import oneSignalRestOwner from "libs/one_signal_rest_owner";
-import socketManager from "sockets/socket_manager";
+import {schemas} from "../schemas";
+import socketManager from "../sockets/socket_manager";
 import eventEmitter = require("./event-emitter");
 
 require('fs').readdirSync(__dirname).filter((file: string) => {
@@ -12,8 +10,6 @@ require('fs').readdirSync(__dirname).filter((file: string) => {
     console.log("File: ", file)
     let handler = require(path.join(__dirname, file));
   let additionServices = {
-    oneSignalEndUsers,
-    oneSignalRestOwner,
     socketManager
     };
   handler(eventEmitter, schemas, additionServices);
