@@ -4,7 +4,6 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes: Se
     var User = sequelize.define("User", {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
-        name: DataTypes.STRING,
         phone: DataTypes.STRING,
         gender: DataTypes.STRING,
         role: DataTypes.ENUM('admin', 'master', 'student'),
@@ -30,7 +29,7 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes: Se
         }
     });
 
-    User.associate = function (schemas) {
+    User.associate = function (schemas: any) {
       User.hasOne(schemas.StudentProfile);
       User.hasOne(schemas.MasterProfile);
       User.belongsTo(schemas.Image, {as: 'avatar'});

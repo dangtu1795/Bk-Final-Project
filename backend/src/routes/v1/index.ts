@@ -5,6 +5,7 @@ var router = express.Router();
 import * as v1 from "../../controllers/v1";
 
 router.use(authenticate.isAuthorized);
+router.get('/user/profile', (v1 as any).user.getProfile)
 let ignores = ["default"];
 for (let key of Object.keys(v1)) {
     if (ignores.contains(key))

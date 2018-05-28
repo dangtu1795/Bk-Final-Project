@@ -18,7 +18,7 @@ var fn = function (socket) {
     }
     let token = socket.token || s[1].token || null;
     let response = {};
-    let result = await auth.verify(token);
+    let result = await auth.verifyToken(token);
     if (result && !(result as any).error) {
       socket.jwt = result;
       socket.token = token;
@@ -53,7 +53,7 @@ var fn = function (socket) {
   socket.on('login', async function (data, cb) {
     let token = data.token;
     let response = {};
-    let result = await auth.verify(token);
+    let result = await auth.verifyToken(token);
     if (result && !(result as any).error) {
       socket.jwt = result;
       socket.uid = (result as any).id;

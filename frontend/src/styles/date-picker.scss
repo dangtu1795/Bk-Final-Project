@@ -1,0 +1,197 @@
+
+.mydp {
+  .disabled {
+    background: $light-blue !important;
+    &:hover {
+      background: $light-blue !important;
+    }
+  }
+  .dimday {
+    opacity: 1 !important;
+  }
+  .headerbtn, .headerbtncell, .headerlabelbtn, td {
+    background: $white !important;
+  }
+  .headerlabelbtn:focus {
+    color: initial !important;
+  }
+
+  .header {
+    tr {
+      td:hover {
+        background: $white !important;
+      }
+    }
+  }
+  tbody {
+    tr:nth-child(6) td:first-child {
+      border-radius: 0 !important;
+    }
+    td:hover {
+      background: $lighter-grey !important;
+    }
+  }
+  .selectedday {
+    .datevalue {
+      background: none !important;
+    }
+  }
+  thead tr {
+    height: 30px;
+    th {
+      font-size: 14px !important;
+    }
+  }
+  border: none !important;
+  .daycell {
+    font-size: 12px;
+    border: 1px solid #DBDBDB !important;
+    &:focus {
+      outline: none !important;
+    }
+
+    &:not(.disabled) {
+      .datevalue {
+        line-height: 22px;
+        &.currmonth {
+          color: $grey !important;
+        }
+      }
+    }
+  }
+  tr {
+    height: 35px !important;
+    .daycell:first-child {
+      border-left: none !important;
+    }
+  }
+
+  input {
+    padding-left: 15px !important;
+  }
+}
+
+.selectorarrow {
+  box-shadow: 0 0 10px $light-grey !important;
+  height: 282px !important;
+  border-radius: 0 !important;
+  border-color: $light-grey !important;
+  &:before, &:after {
+    display: none;
+  }
+}
+
+.weekdaytitle {
+  background: none !important;
+  color: $skype-blue !important;
+}
+
+.icon-mydpcalendar {
+  display: none !important;
+}
+
+.tablesingleday {
+  padding-top: 7px !important;
+}
+
+.btnclear {
+  display: inline-block;
+  vertical-align: bottom;
+  background: none !important;
+}
+
+.btnpicker {
+  background: transparent url('assets/images/calendar.png') no-repeat !important;
+  height: 22px !important;
+  width: 21px !important;
+  border-radius: 0 !important;
+  background-size: cover !important;
+}
+
+.straw-date-picker {
+  width: 66px;
+  .icon-mydpcalendar {
+    font-size: 40px !important;
+  }
+  .headertodaybtn {
+    border: none !important;
+  }
+}
+
+.pernament {
+  .straw-date-picker {
+    .selector {
+      border: none !important;
+    }
+    .selectorarrow {
+      position: relative;
+      height: 35px !important;
+    }
+    .caltable {
+      tbody {
+        display: none;
+      }
+    }
+    thead {
+      th {
+        cursor: pointer;
+        @extend .border;
+        &:hover {
+          background: $lighter-grey !important;
+        }
+      }
+    }
+    .highlight:hover {
+      background: $green !important;
+    }
+  }
+}
+
+.starting-date-picker {
+  height: 42px;
+  .highlight {
+    background: none !important;
+    span {
+      color: $light-grey !important;
+    }
+  }
+  thead {
+    tr {
+      .daycell:last-child {
+        border-right: none !important;
+      }
+    }
+  }
+  .btnpicker {
+    background-size: 97% !important;
+    height: 22px !important;
+    width: 22px !important;
+    background-position-y: center !important;
+  }
+  .icon-mydpcalendar {
+    font-size: 30px !important;
+  }
+  .selectiongroup {
+    height: 40px !important;
+    border-radius: 1px !important;
+    @extend .border;
+    input {
+      height: 100% !important;
+    }
+    .selbtngroup {
+      padding-right: 7px;
+    }
+  }
+}
+
+.mydp {
+  .highlight {
+    background: $green !important;
+    &:hover {
+      background: $green !important;
+    }
+    span {
+      color: $white !important;
+    }
+  }
+}

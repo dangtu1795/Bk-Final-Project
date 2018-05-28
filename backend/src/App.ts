@@ -4,6 +4,9 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as debug from 'debug';
+import * as cookieParser from 'cookie-parser';
+import * as session from "express-session";
+var upload = require('multer')({dest: 'public/uploads/'}).any();
 
 var port;
 require("./libs/extend");
@@ -27,8 +30,11 @@ export default class App {
     private middleware(options): void {
         this.express.use(acceptCors);
         this.express.use(logger('dev'));
+        this.express.use(upload);
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({extended: false}));
+        this.express.use(cookieParser());
+        this.express.use(session({secret: 'BKE@2018', cookie: {maxAge: 60 * 60000}}));
     }
 
 

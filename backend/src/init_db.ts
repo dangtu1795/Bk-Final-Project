@@ -10,9 +10,10 @@
 import {sequelize} from "./schemas"
 function initDb(){
     try {
-        return sequelize.sync({force: true});
+        sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(
+            sequelize.sync({force: true})
+        )
     } catch (e) {
-        console.log("========== init migration and clear database!");
         console.error(e.stack);
     }
 }

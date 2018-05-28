@@ -27,9 +27,8 @@ export default function defineCourse(sequelize: Sequelize.Sequelize, DataTypes: 
         }
     });
 
-    Course.associate = function (schemas) {
-      Course.belongsTo(schemas.Faculty);
-      Course.belongsTo(schemas.Major);
+    Course.associate = function (schemas: any) {
+      Course.belongsTo(schemas.MasterProfile, {as: 'Master', foreignKey: 'MasterProfileId'});
       Course.hasMany(schemas.Class);
       Course.belongsTo(schemas.Image, {as: 'cover'});
     };

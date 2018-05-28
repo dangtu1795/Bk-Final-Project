@@ -15,17 +15,14 @@ const listConstraints = {
     "password": {
         validates: [...PasswordConstraint]
     },
-}
+};
 
 class Login extends CrubAPI {
     async create(req: Request, res: Response) {
         try {
             let {email, password} = req.body;
-            console.log(req.body)
-            console.log(email, password)
             let valid = validateHelper.runValidatingObject({email, password}, listConstraints);
             if (valid) {
-                console.log(valid)
                 return res.send(ResponseTemplate.error({
                     code: ResponseCode.INPUT_DATA_NULL,
                     message: valid.message,
@@ -62,12 +59,26 @@ class Login extends CrubAPI {
                 ));
             }
 
+            let profile;
+            if(user.role == 'master') {
+                profile = await user.getMasterProfile();
+                console.log('profile',profile)
+            }
+
+            if (user.role == 'student') {
+                profile = await user.getStudentProfile()
+            }
+
             let j_user = user.toJSON();
             delete j_user.password;
 
             let jwt = await auth.generateToken({
-                u_id: user.id,
-                username:j_user.email
+                u_id: j_user.id,
+                email: j_user.email,
+                f_id: j_user.facultyId,
+                m_id: j_user.majorId,
+                p_id: profile && profile.id,
+                role: j_user.role
             });
 
 

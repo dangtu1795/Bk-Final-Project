@@ -28,4 +28,8 @@ export class UserService{
   getLecture() {
     return this.http.get('lecture').toPromise();
   }
+
+  getCourse() {
+    return this.http.get('course').toPromise();
+  }
 }

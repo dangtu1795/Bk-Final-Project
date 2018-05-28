@@ -17,7 +17,13 @@ class Database {
         let dbConfig = config.database;
         console.log("DB CONFIG ", dbConfig);
 
-        this._sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig.config);
+        this._sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password,
+            Object.assign({
+                define: {
+                charset: 'utf8',
+                collate: 'utf8_general_ci',
+                timestamps: true}}, dbConfig.config)
+        );
         this._sequelize
             .authenticate()
             .then(() => {

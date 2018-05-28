@@ -28,8 +28,8 @@ export default function defineLecture(sequelize: Sequelize.Sequelize, DataTypes:
         }
     });
 
-    Lecture.associate = function (schemas) {
-      Lecture.belongsTo(schemas.Course);
+    Lecture.associate = function (schemas: any) {
+      Lecture.belongsTo(schemas.Class);
     };
 
     return Lecture;

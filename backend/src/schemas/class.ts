@@ -27,9 +27,11 @@ export default function defineClass(sequelize: Sequelize.Sequelize, DataTypes: S
         }
     });
 
-    Class.associate = function (schemas) {
+    Class.associate = function (schemas: any) {
+        Class.belongsTo(schemas.Course);
         Class.hasMany(schemas.Lecture);
         Class.belongsTo(schemas.Schedule);
+        Class.belongsToMany(schemas.StudentProfile, {through: "ClassMembers", as: 'Members'})
     };
 
     return Class;

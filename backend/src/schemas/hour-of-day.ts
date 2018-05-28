@@ -14,7 +14,7 @@ export default function defineHourOfDay(sequelize: Sequelize.Sequelize, DataType
         day_num: DataTypes.INTEGER,
     });
 
-    HourOfDay.associate = function (schemas) {
+    HourOfDay.associate = function (schemas: any) {
         HourOfDay.belongsToMany(schemas.Schedule, {
             through: 'ScheduleHour'
         });

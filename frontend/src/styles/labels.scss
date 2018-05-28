@@ -1,0 +1,20 @@
+.skill-container {
+  &.inline {
+
+  }
+
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 10px 10px 10px 0px;
+
+  span {
+    background-color: $skype-blue;
+    color: $white;
+    display: inline-block;
+    padding: 8px 25px;
+    border-radius: 6px;
+  }
+}
+

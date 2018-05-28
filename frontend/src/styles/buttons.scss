@@ -1,0 +1,108 @@
+.straw-btn {
+  height: 40px;
+  border-radius: 1px;
+  border: 1px solid $skype-blue !important;
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    border: 1px solid $skype-blue !important;
+    outline: none;
+    box-shadow: none;
+  }
+  &:disabled {
+    border: 1px solid $light-grey !important;
+  }
+}
+
+.straw-btn-full {
+    width: 100%;
+}
+
+.straw-btn-default {
+  background-color: $white;
+  color: $skype-blue;
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    background-color: $white;
+    color: $skype-blue;
+  }
+  &:disabled {
+    background-color: $light-grey !important;
+    color: $white !important;
+  }
+}
+
+.straw-btn-primary {
+  background-color: $skype-blue;
+  color: $white;
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    background-color: $skype-blue;
+    color: $white;
+  }
+}
+
+.straw-btn-disable {
+  color: $white !important;
+  border: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &:focus:active {
+    color: $white !important;
+    border: none;
+  }
+}
+
+.straw-btn-submit {
+  width: 140px;
+}
+
+.straw-btn-disable {
+  background-color: $light-grey;
+  color: $white;
+  border: 1px solid $light-grey !important;
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:focus {
+    border: none;
+    background-color: $light-grey;
+    border: 1px solid $light-grey !important;
+    color: $white;
+  }
+}
+
+a.straw-btn {
+  padding: 9px;
+}
+.straw-btn-upload-img {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.preview-img {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background: $light-skype-blue url('assets/images/camera.png') no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding: 50px 5px 0 5px;
+  font-size: $font-normal;
+  line-height: 17px;
+}
+.straw-btn-join-header{
+  border: 1px solid #ccc !important;
+  border-radius: 5px;
+  padding: 0 10px !important;
+  text-transform: none !important;
+  &:hover{
+    font-weight: normal !important;
+  }
+}

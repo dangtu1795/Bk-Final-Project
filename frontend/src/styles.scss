@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/variables";
+@import "styles/colors";
+@import "styles/types";
+@import "styles/buttons";
+@import "styles/inputs";
+@import "styles/notification-box.scss";
+@import "styles/responsive";
+@import "styles/noti.scss";
+@import "styles/date-picker";
+@import "styles/bootstrap-tagsinput";
+
+
+.border-circle {
+  border-radius: 100%;
+}
+
+.border-none {
+  border: none !important;
+}
+
+.border-right {
+  border-right: 1px solid $light-grey;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $light-grey;
+}
+
+.border-top {
+  border-top: 1px solid $light-grey;
+}
+
+.border {
+  border: 1px solid $light-grey;
+}
+
+.border-lighter-grey {
+  border-color: $light-grey;
+}
+
+.border-light-green {
+  border-color: $light-green;
+}
+
+.border-circle {
+  border-radius: 100%;
+}
+
+.body-container {
+  min-height: 762px;
+}

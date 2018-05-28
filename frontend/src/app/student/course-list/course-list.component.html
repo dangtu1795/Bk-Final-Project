@@ -1,0 +1,20 @@
+<div *ngFor="let course of courses" class="row">
+  <p><label>Name: </label> {{course.name}}</p>
+  <p><label>Description</label> {{course.description}}</p>
+  <p><label>Outline</label> {{course.outline}}</p>
+  <p><label>Master: </label> {{course.Master.name}}</p>
+  <div class="row">
+    <div class="col-xs-2">
+      <label >Class:</label>
+    </div>
+    <div class="col-xs-10">
+      <em *ngIf="!course.Classes.length"> Not avaiable </em>
+      <ul *ngFor="let class of course.Classes">
+        <a [routerLink]="['/student/class', class.id]"><li>{{class.name}}</li></a>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+  <br>
+</div>

@@ -1,0 +1,48 @@
+<h1 style="margin-left: 30%; ">Hệ Thống Học Tập Trực Tuyến</h1>
+<div class="screen">
+  <div class="column1">
+    <youtube-player
+      [width]="'100%'"
+      [height]="'100%'"
+      [videoId]="videoId1"
+      [playerVars]="playerOptions"
+      (ready)="savePlayer($event,1)"
+      (change)="onStateChange($event)">
+    </youtube-player>
+
+  </div>
+
+  <div class="column2">
+    <youtube-player
+      [width]="'100%'"
+      [height]="'100%'"
+      [videoId]="videoId2"
+      [playerVars]="playerOptions"
+      (ready)="savePlayer($event,2)"
+      (change)="onStateChange($event)">
+    </youtube-player>
+  </div>
+</div>
+
+<div class="control-bar">
+  <input style="position: absolute; left: 0;" type="image" width="48" height="48" src="../../assets/images/full.png"
+         (click)="playFS(1)">
+  <input style="position: absolute; right: 0;" type="image" width="48" height="48" src="../../assets/images/full.png"
+         (click)="playFS(2)">
+  <input style="position: absolute; left: 48%;" type="image" width="48" height="48" [src]="playStateButton"
+         (click)="togglePlay()">
+</div>
+<div class="seekbar" style="width: 100%">
+  <input class="ps1" type="range" value="0" max="100" step="1" id="custom-progress" (change)="changeProgress($event)">
+</div>
+
+<div class="text-right">
+  <h3 style="display: inline-block; padding-right: 30px" class="text-left"><i>Custom Player:</i></h3>
+  <div class="custom-size" style="display: inline-flex; vertical-align: middle">
+    <input src="../../assets/images/return.png" type="image" (click)="funcResize()"
+           style=" margin-right: 5%; width: 100px; height: 50px;left: 20%; ">
+    <input class="ps2" type="range" value="5" max="10" step="1" style="color: green;" (change)="funcRate($event)"
+           id="customRate">
+  </div>
+</div>
+
