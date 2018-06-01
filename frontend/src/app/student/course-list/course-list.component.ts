@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../shared-services/api/user.service";
+import {CourseService} from "../../shared-services/api/course.service";
+import {NotificationService} from "../../shared-services/notification.service";
 
 @Component({
   selector: 'app-course-list',
@@ -9,12 +10,20 @@ import {UserService} from "../../shared-services/api/user.service";
 export class CourseListComponent implements OnInit {
 
   courses;
-  constructor(private userService: UserService) { }
+  constructor(private courseService: CourseService, private noti: NotificationService) { }
 
   async ngOnInit() {
-    let res = await this.userService.getCourse();
-    this.courses = res.data;
-    console.log(res);
+    try {
+      this.noti.startLoading();
+      let res = await this.courseService.getCourse();
+      this.noti.success({title: 'Congratulation!', message: 'Courses loading successfully!'});
+      this.courses = res.data;
+    } catch (e) {
+      this.noti.error({title: 'Error!', message: e.message || 'Courses loading failed!'})
+    } finally {
+      this.noti.stopLoading();
+    }
+
   }
 
 }

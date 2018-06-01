@@ -12,10 +12,23 @@ export class AppComponent implements OnInit {
   constructor(private userSevice: UserService, private authen: AuthenticateService, private router: Router) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log(this.authen.account);
     if (!this.authen.account) {
       this.redirectToLogin();
+    }
+
+    try {
+      let rs = await this.userSevice.checkToken(this.authen.token);
+      if(!rs.success) {
+        this.authen.clear();
+        this.redirectToLogin();
+      }
+    } catch (e) {
+      if(e.code == 104) {
+        this.authen.clear();
+        this.redirectToLogin();
+      }
     }
   }
 

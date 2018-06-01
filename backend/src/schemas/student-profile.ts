@@ -9,8 +9,8 @@ export default function defineStudentProfile(sequelize: Sequelize.Sequelize, Dat
     });
 
     StudenProfile.associate = function (schemas: any) {
-      StudenProfile.belongsTo(schemas.User);
-      StudenProfile.belongsToMany(schemas.Class, {through: "ClassMembers", as: 'Classes'})
+        StudenProfile.belongsTo(schemas.User);
+        StudenProfile.belongsToMany(schemas.Class, {through: "ClassMembers", as: 'Classes'});
     };
 
     return StudenProfile;

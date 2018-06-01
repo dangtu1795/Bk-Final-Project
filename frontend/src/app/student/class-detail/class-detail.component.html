@@ -1,3 +1,28 @@
-<p>
-  class-detail works!
-</p>
+
+<div class="container container-header">
+  <div class="row">
+    <div class="col-md-10">
+      <h5>{{Class?.name}}</h5>
+    </div>
+    <div class="text-right col-md-2" style="vertical-align: bottom">
+      <h5>
+        Member: {{Class?.member_num}} / <em>{{Class?.capacity}}</em>
+      </h5>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div *ngIf="Class && !Class.joined" class="text-center">
+    <h3>You are not member of this class</h3>
+    <button class="btn btn-success" (click)="requestJoinClass()">Click to join class now!</button>
+  </div>
+  <div *ngIf="Class?.joined">
+    <h3>{{Class.note}}</h3>
+    <p *ngIf="!Class.Lectures.length">Coming soon</p>
+    <ol>
+      <li *ngFor="let lecture of Class.Lectures">
+        <a [routerLink]="['/student/lecture', lecture.id]">{{lecture.title}}</a>
+      </li>
+    </ol>
+  </div>
+</div>

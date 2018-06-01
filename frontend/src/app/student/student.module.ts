@@ -10,6 +10,9 @@ import {CourseListComponent} from './course-list/course-list.component';
 import { LectureListComponent } from './lecture-list/lecture-list.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassDetailComponent } from './class-detail/class-detail.component';
+import {ShareModule} from "../share-components/share.module";
+import {FormsModule} from "@angular/forms";
+import {MyDatePickerModule} from "../share-components/my-date-picker/my-date-picker.module";
 
 const studentRoute = [
   {
@@ -24,7 +27,9 @@ const studentRoute = [
       {
         path: 'classes', component: ClassListComponent
       },
-
+      {
+        path: 'class/:id', component: ClassDetailComponent
+      },
       {
         path: 'courses', component: CourseListComponent
       },
@@ -32,7 +37,7 @@ const studentRoute = [
         path: 'lectures', component: LectureListComponent,
       },
       {
-        path: 'lectures:id', component: WatchLectureComponent,
+        path: 'lecture/:id', component: WatchLectureComponent,
       },
     ]
   }
@@ -42,8 +47,11 @@ const studentRoute = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forRoot(studentRoute),
-    YoutubePlayerModule
+    YoutubePlayerModule,
+    ShareModule,
+    MyDatePickerModule
   ],
   declarations: [
     StudentComponent,

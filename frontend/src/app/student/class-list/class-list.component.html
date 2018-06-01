@@ -1,7 +1,58 @@
-<div class="dark-bg body-container text-center">
+<div class="container container-header">
+  <div class="col-md-10">
+    <h3>My class</h3>
+  </div>
+  <div class="text-center col-md-2">
+    <a role="button" routerLink="/student/courses"
+       class="btn straw-btn straw-btn-full straw-btn-primary straw-btn-submit">
+      Find More Class
+    </a>
+  </div>
+</div>
+<div class="container" *ngIf="classes?.length;">
+  <div *ngFor="let class of classes; let i = index" class="table-info">
+    <table class="table table-responsive table-bordered">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Time life</th>
+        <th>Schedule</th>
+        <th>Note</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{i+1}}</td>
+        <td class="text-primary">{{class.name}}</td>
+        <td>
+          <p>Starting at: <span class="text-info">{{class.Schedule.from | date: 'dd-MM-yyyy'}}</span></p>
+          <p>Ending at: <span class="text-danger">{{class.Schedule.to | date: 'dd-MM-yyyy'}}</span></p>
+        </td>
+        <td>
+          <ol>
+            <li *ngFor="let hour of class.Schedule.hours">
+              <span class="text-primary">{{weekDayIndex[hour.day_num]}}</span> From {{hour.start/60}}: {{hour.start % 60 <10? '0'+ hour.start % 60 :
+              hour.start % 60}} To {{hour.end/60}}: {{hour.end % 60 <10? '0'+ hour.end % 60 : hour.end % 60}}
+            </li>
+          </ol>
+        </td>
+        <td>{{class.note}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a class="btn btn-primary" [routerLink]="['/student/class',class.id]">Go to class</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dark-bg container text-center" *ngIf="!classes?.length" style="min-height: 500px">
   <div class="container">
     <h1 class="text-skype-blue" style="padding-top: 90px; padding-bottom: 40px;">Let's get started!</h1>
-    <a role="button" routerLink="/student/courses" class="btn straw-btn straw-btn-full straw-btn-primary straw-btn-submit">
+    <a role="button" routerLink="/student/courses"
+       class="btn straw-btn straw-btn-full straw-btn-primary straw-btn-submit">
       Find Class
     </a>
   </div>

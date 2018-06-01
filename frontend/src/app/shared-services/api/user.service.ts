@@ -25,11 +25,7 @@ export class UserService{
     return this.http.post('user', data).toPromise();
   }
 
-  getLecture() {
-    return this.http.get('lecture').toPromise();
-  }
-
-  getCourse() {
-    return this.http.get('course').toPromise();
+  async checkToken(token) {
+    return this.http.post("token/check", {token}).toPromise();
   }
 }

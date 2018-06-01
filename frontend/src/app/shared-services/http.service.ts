@@ -23,6 +23,16 @@ export class HttpService {
     this.formDataHeaders = new HttpHeaders({
       "Authorization": this.authenServer.token
     })
+    this.authenServer.authenInfo.subscribe(data => {
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        "Authorization": data.token
+      });
+
+      this.formDataHeaders = new HttpHeaders({
+        "Authorization": data.token
+      })
+    })
   }
 
   get(link): Observable<any> {

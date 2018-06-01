@@ -53,6 +53,35 @@ export class Lecture extends CrubAPI {
       }
 
     }
+
+    async create(req: Request, res: Response) {
+        try {
+            let jwt = (req as any).jwt;
+            let {class_id, course_id, videoUrl, slideUrl, title} = req.body;
+
+            let user = await schemas.User.findByPrimary(jwt.u_id);
+            let exist_class = await schemas.Class.findByPrimary(class_id);
+            if(!user || !exist_class) {
+                return res.send(ResponseTemplate.dataNotFound('data'))
+            }
+
+            let newLecture = await schemas.Lecture.create({
+                videoUrl, slideUrl, title
+            });
+
+            await exist_class.addLecture(newLecture);
+
+            return res.send(ResponseTemplate.success({
+                code: ResponseCode.SUCCESS,
+            }));
+        } catch (e) {
+            console.log(e);
+            res.send(ResponseTemplate.internalError({
+                data: null
+            }));
+        }
+
+    }
 }
 
 const lecture = new Lecture();

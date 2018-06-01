@@ -9,6 +9,7 @@ import {QuestionComponent} from './question/question.component';
 import { ClassComponent } from './class/class.component';
 import { CourseNewComponent } from './course-new/course-new.component';
 import { ClassNewComponent } from './class-new/class-new.component';
+import {ShareModule} from "../share-components/share.module";
 
 
 const masterModule = [
@@ -41,7 +42,8 @@ const masterModule = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forRoot(masterModule)
+        RouterModule.forRoot(masterModule),
+        ShareModule
     ],
     declarations: [MasterComponent, CoursesComponent, CourseDetailComponent, WatchCourseDetailComponent, QuestionComponent, ClassComponent, CourseNewComponent, ClassNewComponent]
 })

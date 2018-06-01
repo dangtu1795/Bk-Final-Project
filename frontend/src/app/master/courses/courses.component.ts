@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CourseService} from "../../shared-services/api/course.service";
+import {NotificationService} from "../../shared-services/notification.service";
 
 @Component({
   selector: 'app-courses',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor() { }
+  courses;
+  constructor(private courseService: CourseService, private noti: NotificationService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+      this.noti.startLoading();
+      let res = await this.courseService.getCourse();
+      if(res.success) {
+        this.courses = res.data;
+        this.noti.success({title: 'Congrastulation!', message: 'Course loading successfully.'})
+      }
+    } catch (e) {
+      this.noti.success({title: 'Error!', message: 'Course loading failed.'})
+    } finally {
+      this.noti.stopLoading();
+    }
   }
 
   setLayout(event) {

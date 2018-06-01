@@ -16,7 +16,11 @@ import {StudentModule} from "./student/student.module";
 import {MasterModule} from "./master/master.module";
 import {YoutubePlayerModule} from "ngx-youtube-player";
 import {SocketService} from "./shared-services/socket.service";
-
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import {CourseService} from "./shared-services/api/course.service";
+import {NotificationService} from "./shared-services/notification.service";
+import {ToastyModule} from "ng2-toasty"
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 const appRoutes = [
   {
     path: '', component: LoginComponent
@@ -28,7 +32,7 @@ const appRoutes = [
     path: 'registration', component: RegistrationComponent
   },
   {
-    path: "**", component: RegistrationComponent
+    path: "**", component: NotFoundComponent
   }
 ]
 
@@ -36,18 +40,22 @@ const appRoutes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     YoutubePlayerModule,
     StudentModule,
-    MasterModule
+    MasterModule,
+    ToastyModule.forRoot(),
+
   ],
-  providers: [UtilService, LocalStorageService, HttpService, UserService, AuthenticateService, SocketService],
+  providers: [UtilService, LocalStorageService, HttpService, UserService, AuthenticateService, SocketService, CourseService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

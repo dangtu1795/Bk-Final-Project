@@ -2,7 +2,8 @@ import auth from "../libs/auth"
 import ResponseTemplate from "../helpers/response-template";
 
 var excludePath = [
-    "/login"
+    "/login",
+    "/token/check"
 ];
 
 export const authenticate = {

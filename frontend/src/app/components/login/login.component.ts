@@ -3,6 +3,7 @@ import {UserService} from "../../shared-services/api/user.service";
 import {AuthenticateService} from "../../shared-services/authenticate.service";
 import {Router} from "@angular/router";
 import {SocketService} from "../../shared-services/socket.service";
+import {NotificationService} from "../../shared-services/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService,
               private socketService: SocketService,
+              private noti: NotificationService,
               private authen: AuthenticateService,
               private router: Router) {
   }
@@ -31,25 +33,32 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    console.log(this.user);
-    let res = await this.userService.login(this.user);
-    console.log(res);
-    if (res.success) {
-      if (['student', 'master'].indexOf(res.data.role) < 0) {
-        return alert('Account is not valid, Please try another');
-      }
-      let account = res.data;
-      let token = res.token;
-      this.authen.updateInfo(token, account);
-      this.socketService.connectSocket();
-      if (res.data.role == 'student') {
-        this.router.navigateByUrl('/student')
+    try {
+      this.noti.startLoading();
+      let res = await this.userService.login(this.user);
+      if (res.success) {
+        this.noti.success({title: 'Congratulation', message: 'Welcome to BKE!'});
+        if (['student', 'master'].indexOf(res.data.role) < 0) {
+          return alert('Account is not valid, Please try another');
+        }
+        let account = res.data;
+        let token = res.token;
+        this.authen.updateInfo(token, account);
+        this.socketService.connectSocket();
+        if (res.data.role == 'student') {
+          this.router.navigateByUrl('/student')
+        } else {
+          this.router.navigateByUrl('/master')
+        }
       } else {
-        this.router.navigateByUrl('/master')
+        this.errors[res.error.data.key] = res.error.message;
       }
-    } else {
-      this.errors[res.error.data.key] = res.error.message;
+    } catch (e) {
+      this.noti.error({title: 'Error!', message: e.message || 'Login fail!'})
+    } finally {
+      this.noti.stopLoading()
     }
+
   }
 
   goToRegistration() {

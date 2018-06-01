@@ -3,6 +3,8 @@ import {AuthenticateService} from "../../shared-services/authenticate.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../shared-services/api/user.service";
 import {Subject} from "rxjs";
+import {CourseService} from "../../shared-services/api/course.service";
+import {NotificationService} from "../../shared-services/notification.service";
 
 @Component({
   selector: 'app-watch-lecture',
@@ -44,29 +46,39 @@ export class WatchLectureComponent implements OnInit, OnDestroy  {
 
   playStateButton = "../../assets/images/play.png";
 
-  constructor(private authen: AuthenticateService, private router: Router, private userService: UserService) { }
+  constructor(private authen: AuthenticateService, private router: Router,
+              private noti: NotificationService,
+              private courseService: CourseService) { }
 
  async ngOnInit() {
-    let res = await this.userService.getLecture();
-    this.videoId1 = res.data.videoUrl;
-    this.videoId2 = res.data.slideUrl;
-    if (this.authen.account.role !== 'student') {
-      this.router.navigateByUrl('/master')
-    }
-
-    this.step.subscribe(data => {
-      console.log('data: ', data);
-      if (data > 0) {
-        setInterval(() => {
-          if (!this.isRunning) {
-            return;
-          }
-          this.current++;
-          console.log("current: ", this.current, "step: ", data);
-          $('#custom-progress').val(this.current);
-        }, data);
+    try {
+      this.noti.startLoading()
+      let res = await this.courseService.getLecture();
+      this.noti.success({title: 'Congratulation!', message: 'Video loading successfully!'});
+      this.videoId1 = res.data.videoUrl;
+      this.videoId2 = res.data.slideUrl;
+      if (this.authen.account.role !== 'student') {
+        this.router.navigateByUrl('/master')
       }
-    });
+
+      this.step.subscribe(data => {
+        console.log('data: ', data);
+        if (data > 0) {
+          setInterval(() => {
+            if (!this.isRunning) {
+              return;
+            }
+            this.current++;
+            console.log("current: ", this.current, "step: ", data);
+            $('#custom-progress').val(this.current);
+          }, data);
+        }
+      });
+    } catch (e) {
+      this.noti.error({title: 'Error!', message: e.message || "Videos loading failed!"})
+    } finally {
+      this.noti.stopLoading();
+    }
 
   }
   savePlayer(player, id) {
