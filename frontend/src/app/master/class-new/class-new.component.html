@@ -1,3 +1,110 @@
-<p>
-  class-new works!
-</p>
+<div class="content-panel" style="padding-bottom: 30px">
+  <div class="panel-block">
+    <h2 class="text-center">Create New Class</h2>
+    <div class="form-group">
+      <label >Name</label>
+      <input type="text" class="form-control" name="name" autocomplete="off" [(ngModel)]="class.name">
+    </div>
+    <div class="form-group">
+      <label >Note</label>
+      <textarea type="text" class="form-control" name="note" autocomplete="off" [(ngModel)]="class.note" rows="6"></textarea>
+    </div>
+    <div class="form-group">
+      <label >Capacity</label>
+      <input type="number" class="form-control" name="capacity" autocomplete="off" [(ngModel)]="class.capacity">
+    </div>
+
+    <div class="pernament">
+      <h3>Schedules</h3>
+      <div class="straw-date-picker pernament" >
+        <my-date-picker [options]="permanentDatePickerOptions"
+                        (dayChanged)="onDateChanged($event)"></my-date-picker>
+      </div>
+      <div style="padding-left: 18px">
+        <div class="row margin-0" style="padding: 10px" *ngFor="let hour of Schedules">
+          <div class="col-md-2 col-md-offset-2">
+            Every {{weekDayIndex[hour.day_num]}}
+          </div>
+          <div class="col-md-6">
+            From {{hour.start | scheduleTime}} to {{hour.end | scheduleTime}}
+            <span>
+              <a (click)="removeTime(hour)" style="padding: 0 10px; cursor: pointer">
+                <i class="fa fa-remove"></i>
+              </a>
+              <a (click)="editSchedule(hour)" style="cursor: pointer">
+                <i class="fa fa-edit"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="padding-bottom: 15px;">
+      <div class="col-md-1" style="line-height: 45px; padding-right: 0px">
+        <label>Start Date</label>
+      </div>
+      <div class="col-md-5">
+        <div class="starting-date-picker border">
+          <my-date-picker [options]="startingDatePickerOptions" [(ngModel)]="schedule_start"
+                          name="schedule_start" (dateChanged)="test()"></my-date-picker>
+        </div>
+      </div>
+      <div class="col-md-1" style="line-height: 45px; padding-right: 0px">
+        <label>End Date</label>
+      </div>
+      <div class="col-md-5">
+        <div class="starting-date-picker border">
+          <my-date-picker [options]="startingDatePickerOptions" [(ngModel)]="schedule_end"
+                          name="schedule_start" (dateChanged)="test()"></my-date-picker>
+        </div>
+      </div>
+    </div>
+
+    <button class="button straw-btn-full" (click)="createClass()">Submit</button>
+  </div>
+</div>
+
+
+<div class="modal fade" role="dialog" id="modalSetTimeNormal" tabindex="-1" aria-labelledby="mymodalSetTimeNormal"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-content-custom">
+      <div class="modal-header skype-blue-bg" style="padding: 10px 20px">
+        <span class="font-large text-white" id="myModalLabel">Select Time</span>
+      </div>
+      <div class="modal-body" style="padding: 20px">
+        <form role="form" #hourForm="ngForm">
+          <div class="row">
+            <span style="font-size: 20px" class="col-sm-2">
+                {{weekDayIndex[currentDay]}}
+            </span>
+          </div>
+          <div class="row padding-top-15" *ngFor="let hour of Hours[currentDay]; let i = index">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              From
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-primary" style="padding-left: 36px">
+                {{hour.start | scheduleTime}}
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              To
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-primary">
+                {{hour.end | scheduleTime}}
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-skype-blue" style="line-height: 45px; padding-left: 0">
+              <p *ngIf="!hour.selected" class="text-primary" (click)='selectTime(hour)' style="cursor: pointer">select</p>
+              <p *ngIf="hour.selected" class="text-danger" (click)='removeTime(hour)' style="cursor: pointer">remove</p>
+            </div>
+          </div>
+          <div class="border-none text-center" style="padding-top: 20px">
+            <button type="button" class="btn straw-btn straw-btn-full straw-btn-default" data-dismiss="modal"
+                    style="max-width: 110px">Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,18 @@
-<p>
-  course-new works!
-</p>
+<div class="content-panel" style="padding-bottom: 30px">
+  <div class="panel-block">
+    <h2 class="text-center">Create New Course</h2>
+    <div class="form-group">
+      <label >Name</label>
+      <input type="text" class="form-control" name="name" autocomplete="off" [(ngModel)]="course.name">
+    </div>
+    <div class="form-group">
+      <label >Description</label>
+      <input type="text" class="form-control" name="=description" autocomplete="off" [(ngModel)]="course.description">
+    </div>
+    <div class="form-group">
+      <label >Outline</label>
+      <textarea type="text" class="form-control" name="outline" rows="10" [(ngModel)]="course.outline"></textarea>
+    </div>
+    <button class="button straw-btn-full" (click)="createCourse()">Submit</button>
+  </div>
+</div>
