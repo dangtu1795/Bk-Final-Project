@@ -41,6 +41,14 @@ export class Classes extends CrubAPI {
     async create(req: Request, res: Response) {
         try {
             let {name, note, capacity, CourseId, hours, from, to} = req.body;
+            console.log('======hours: ', hours)
+            if(!hours || hours.length === 0) {
+                return res.send(ResponseTemplate.error({
+                    code: ResponseCode.INPUT_DATA_NULL,
+                    message: 'hours is not null',
+                    error: hours
+                }))
+            }
             let newClass = await schemas.Class.create({
                 name, capacity, note, CourseId
             });
@@ -78,7 +86,9 @@ export class Classes extends CrubAPI {
             let id = req.params.id;
             let jwt = (req as any).jwt;
             let user = await schemas.User.findByPrimary(jwt.u_id);
-            let exist_class = await schemas.Class.findByPrimary(id);
+            let exist_class = await schemas.Class.findByPrimary(id, {
+                include: [{model: schemas.Schedule, include: [{model: schemas.HourOfDay, as: 'hours'}]}]
+            });
             if(!exist_class || !user) {
                 return res.send(ResponseTemplate.dataNotFound('data'))
             }

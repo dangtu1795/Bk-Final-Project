@@ -102,8 +102,8 @@ export class Course extends CrubAPI {
                     MasterProfileId: jwt.p_id
                 },
                 include: [
-                    {model: schemas.Class},
-                    {model: schemas.Image, as: 'cover'}
+                    {model: schemas.Class, include:[{model: schemas.Schedule}], required: false},
+                    {model: schemas.Image, as: 'cover', required: false}
                 ]
             });
             return res.send(ResponseTemplate.success({
