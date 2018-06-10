@@ -13,6 +13,7 @@ import {ShareModule} from "../share-components/share.module";
 import {FormsModule} from "@angular/forms";
 import {MyDatePickerModule} from "../share-components/my-date-picker/my-date-picker.module";
 import {TimePipe} from "../share-pipes/time.pipe";
+import {YoutubePlayerModule} from "ngx-youtube-player";
 
 
 const masterModule = [
@@ -41,7 +42,7 @@ const masterModule = [
         path: 'course/:id/question', component: QuestionComponent
       },
       {
-        path: 'course/:id/class/:id', component: ClassComponent
+        path: 'course/:id/class/:id', component: ClassNewComponent
       },
 
 
@@ -55,7 +56,8 @@ const masterModule = [
     FormsModule,
     RouterModule.forRoot(masterModule),
     ShareModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    YoutubePlayerModule
   ],
   declarations: [
     MasterComponent,

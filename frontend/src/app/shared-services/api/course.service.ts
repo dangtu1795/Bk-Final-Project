@@ -16,6 +16,10 @@ export class CourseService {
     return this.http.post('class', data).toPromise();
   }
 
+  updateClass(id, data) {
+    return this.http.put(`class/${id}`, data).toPromise();
+  }
+
   getLecture() {
     return this.http.get('lecture').toPromise();
   }
@@ -34,6 +38,10 @@ export class CourseService {
 
   joinClass(id) {
     return this.http.get(`class/request/${id}`).toPromise();
+  }
+
+  eliminateStudent(data) {
+    return this.http.post('class/request', data).toPromise();
   }
 
   getMyClasses() {

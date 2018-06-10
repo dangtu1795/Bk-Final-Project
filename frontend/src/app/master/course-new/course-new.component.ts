@@ -11,7 +11,7 @@ import {NotificationService} from "../../shared-services/notification.service";
 export class CourseNewComponent implements OnInit {
 
   course = {
-    desctipion: '',
+    description: '',
     name: '',
     outline: ''
   };

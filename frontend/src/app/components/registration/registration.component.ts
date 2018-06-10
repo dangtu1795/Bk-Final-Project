@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
     password: '',
     password_confirm: '',
     gender: 'male',
-    role: ''
+    role: 'student'
   };
 
   errors = {};

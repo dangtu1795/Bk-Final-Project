@@ -8,6 +8,7 @@ router.use(authenticate.isAuthorized);
 router.get('/user/profile', (v1 as any).user.getProfile);
 router.post("/token/check", (v1 as any).token.checkToken);
 router.get("/class/request/:id", (v1 as any).class.requestJoin);
+router.post("/class/request", (v1 as any).class.eliminate);
 router.get("/class/me", (v1 as any).class.getAllClass);
 
 let ignores = ["default"];
