@@ -19,6 +19,7 @@ export class ClassDetailComponent implements OnInit {
   async ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
+      this.courseService.class_id = this.id;
     });
 
     try {

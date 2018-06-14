@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       let res = await this.userService.login(this.user);
       if (res.success) {
         this.noti.success({title: 'Congratulation', message: 'Welcome to BKE!'});
-        if (['student', 'master'].indexOf(res.data.role) < 0) {
+        if (['student', 'master', 'admin'].indexOf(res.data.role) < 0) {
           return alert('Account is not valid, Please try another');
         }
         let account = res.data;
@@ -47,8 +47,10 @@ export class LoginComponent implements OnInit {
         this.socketService.connectSocket();
         if (res.data.role == 'student') {
           this.router.navigateByUrl('/student')
-        } else {
+        } else if(res.data.role == 'master') {
           this.router.navigateByUrl('/master')
+        } else {
+          this.router.navigateByUrl('/admin');
         }
       } else {
         this.errors[res.error.data.key] = res.error.message;

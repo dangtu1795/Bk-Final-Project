@@ -103,9 +103,11 @@ export class ClassNewComponent implements OnInit {
     console.log('hello', this.course);
     await this.getSchedules();
     this.activatedRoute.params.subscribe((params: any) => {
-      this.id = params.id;
-      this.isEdit = true;
-      this.loadClass();
+      this.id = params.class_id;
+      if(this.id) {
+        this.isEdit = true;
+        this.loadClass();
+      }
     })
   }
 

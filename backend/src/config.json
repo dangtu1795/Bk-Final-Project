@@ -7,10 +7,10 @@
   },
   "database": {
     "username": "root",
-    "password": "root",
+    "password": "bk@dev123",
     "database": "bksystem",
     "config": {
-      "host": "localhost",
+      "host": "172.104.47.247",
       "port": 3306,
       "dialect": "mysql"
     }

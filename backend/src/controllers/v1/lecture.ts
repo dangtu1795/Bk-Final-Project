@@ -12,47 +12,6 @@ const listConstraints = {
 };
 
 export class Lecture extends CrubAPI {
-    async list(req: Request, res: Response) {
-      try {
-          let {slideUrl, videoUrl, isUpdate} = req.query;
-          console.log(slideUrl, videoUrl, isUpdate);
-          let lecture = await schemas.Lecture.findAll();
-          if(isUpdate) {
-              if(!slideUrl || !videoUrl) {
-                  return res.send(ResponseTemplate.error({
-                      code: ResponseCode.INPUT_DATA_NULL,
-                      message: 'you must send both videoUrl and slideUrl',
-                      error: {slideUrl, videoUrl}
-                  }))
-              }
-
-              if(lecture.length == 0) {
-                  lecture = await schemas.Lecture.create({
-                      title: 'First Lecture',
-                      slideUrl, videoUrl
-                  })
-              } else {
-                  lecture = lecture[0];
-                  await lecture.update({
-                      slideUrl, videoUrl
-                  })
-              }
-          } else {
-            lecture = lecture[0]
-          }
-
-          return res.send(ResponseTemplate.success({
-              code: ResponseCode.SUCCESS,
-              data:lecture
-          }));
-      } catch (e) {
-          console.log(e);
-          res.send(ResponseTemplate.internalError({
-            data: null
-          }));
-      }
-
-    }
 
     async create(req: Request, res: Response) {
         try {
@@ -61,7 +20,7 @@ export class Lecture extends CrubAPI {
 
             let user = await schemas.User.findByPrimary(jwt.u_id);
             let exist_class = await schemas.Class.findByPrimary(class_id);
-            if(!user || !exist_class) {
+            if (!user || !exist_class) {
                 return res.send(ResponseTemplate.dataNotFound('data'))
             }
 
@@ -73,6 +32,40 @@ export class Lecture extends CrubAPI {
 
             return res.send(ResponseTemplate.success({
                 code: ResponseCode.SUCCESS,
+            }));
+        } catch (e) {
+            console.log(e);
+            res.send(ResponseTemplate.internalError({
+                data: null
+            }));
+        }
+
+    }
+
+    async retrieve(req: Request, res: Response) {
+        try {
+            let id = req.params.id;
+            let jwt = (req as any).jwt;
+            let {class_id} = req.query;
+            let profile = await schemas.StudentProfile.findByPrimary(jwt.p_id);
+            if(!profile) {
+                return res.send(ResponseTemplate.dataNotFound('user'));
+            }
+
+            let classes = await profile.getClasses({
+                where: {id: class_id},
+                include: [{model: schemas.Lecture, where:{id}}]
+            });
+
+            if(classes.length == 0) {
+                return res.send(ResponseTemplate.dataNotFound('class'));
+            }
+
+            let lecture = classes[0].Lectures[0];
+
+            return res.send(ResponseTemplate.success({
+                code: ResponseCode.SUCCESS,
+                data: lecture
             }));
         } catch (e) {
             console.log(e);

@@ -21,12 +21,15 @@
       "styles": [
         "styles.scss",
         "../bower_components/bootstrap/dist/css/bootstrap.min.css",
+        "../bower_components/admin-lte/dist/css/skins/_all-skins.min.css",
+        "../bower_components/admin-lte/dist/css/AdminLTE.min.css",
         "../node_modules/ng2-toasty/style.css",
         "../node_modules/ng2-toasty/style-bootstrap.css"
       ],
       "scripts": [
         "../bower_components/jquery/dist/jquery.min.js",
-        "../bower_components/bootstrap/dist/js/bootstrap.min.js"
+        "../bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "../bower_components/admin-lte/dist/js/adminlte.min.js"
 
       ],
       "environmentSource": "environments/environment.ts",

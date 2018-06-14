@@ -6,6 +6,7 @@ import {Subject} from "rxjs";
 export class CourseService {
 
   public course;
+  public class_id;
   constructor(private http: HttpService) { }
 
   findClass(id) {
@@ -20,8 +21,8 @@ export class CourseService {
     return this.http.put(`class/${id}`, data).toPromise();
   }
 
-  getLecture() {
-    return this.http.get('lecture').toPromise();
+  getLecture(id) {
+    return this.http.get(`lecture/${id}?class_id=${this.class_id}`).toPromise();
   }
 
   getCourse() {

@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthenticateService} from "../../shared-services/authenticate.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {UserService} from "../../shared-services/api/user.service";
 import {Subject} from "rxjs";
 import {CourseService} from "../../shared-services/api/course.service";
@@ -36,6 +36,7 @@ export class WatchLectureComponent implements OnInit, OnDestroy  {
 
   videoId1 = 'sKIbH-gXmX0';
   videoId2 = 'sKIbH-gXmX0';
+  title;
   player1;
   player2;
   current = 0;
@@ -43,23 +44,26 @@ export class WatchLectureComponent implements OnInit, OnDestroy  {
   isRunning = true;
   isEnded = false;
   MAX_DELAY = 1;
+  id;
 
   playStateButton = "../../assets/images/play.png";
 
   constructor(private authen: AuthenticateService, private router: Router,
               private noti: NotificationService,
+              private activatedRoute: ActivatedRoute,
               private courseService: CourseService) { }
 
  async ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+    });
     try {
-      this.noti.startLoading()
-      let res = await this.courseService.getLecture();
+      this.noti.startLoading();
+      let res = await this.courseService.getLecture(this.id);
       this.noti.success({title: 'Congratulation!', message: 'Video loading successfully!'});
       this.videoId1 = res.data.videoUrl;
       this.videoId2 = res.data.slideUrl;
-      if (this.authen.account.role !== 'student') {
-        this.router.navigateByUrl('/master')
-      }
+      this.title = res.data.title;
 
       this.step.subscribe(data => {
         console.log('data: ', data);
@@ -87,6 +91,7 @@ export class WatchLectureComponent implements OnInit, OnDestroy  {
       this.player1.loadVideoById(this.videoId1);
       let duration = this.player1.getDuration();
       this.step.next(10 * duration);
+      console.log('duration: ', duration)
 
     } else {
       this.player2 = player;
@@ -120,7 +125,6 @@ export class WatchLectureComponent implements OnInit, OnDestroy  {
       if (diff > this.MAX_DELAY && this.syncStep < this.maxStep) {
         this.syncStep++;
         console.log('sync step: ', this.syncStep);
-        console.log('in sync...............');
         this.syncPlay();
       }
       this.player1.playVideo();

@@ -16,7 +16,7 @@ import {TimePipe} from "../share-pipes/time.pipe";
 import {YoutubePlayerModule} from "ngx-youtube-player";
 
 
-const masterModule = [
+const masterRoute = [
   {
     path: 'master', component: MasterComponent,
     children: [
@@ -42,7 +42,7 @@ const masterModule = [
         path: 'course/:id/question', component: QuestionComponent
       },
       {
-        path: 'course/:id/class/:id', component: ClassNewComponent
+        path: 'course/:id/class/:class_id', component: ClassNewComponent
       },
 
 
@@ -54,7 +54,7 @@ const masterModule = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forRoot(masterModule),
+    RouterModule.forRoot(masterRoute),
     ShareModule,
     MyDatePickerModule,
     YoutubePlayerModule

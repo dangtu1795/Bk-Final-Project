@@ -21,6 +21,7 @@ import {CourseService} from "./shared-services/api/course.service";
 import {NotificationService} from "./shared-services/notification.service";
 import {ToastyModule} from "ng2-toasty"
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AdminModule} from "./admin/admin.module";
 const appRoutes = [
   {
     path: '', component: LoginComponent
@@ -41,7 +42,7 @@ const appRoutes = [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +53,8 @@ const appRoutes = [
     YoutubePlayerModule,
     StudentModule,
     MasterModule,
+    AdminModule,
     ToastyModule.forRoot(),
-
   ],
   providers: [UtilService, LocalStorageService, HttpService, UserService, AuthenticateService, SocketService, CourseService, NotificationService],
   bootstrap: [AppComponent]
