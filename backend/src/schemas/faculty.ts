@@ -5,7 +5,7 @@ export default function defineFaculty(sequelize: Sequelize.Sequelize, DataTypes:
         name: DataTypes.STRING,
         foundation_date: DataTypes.DATE,
         phone: DataTypes.STRING,
-        wesite: DataTypes.STRING,
+        website: DataTypes.STRING,
         email: DataTypes.STRING,
         overview: DataTypes.TEXT
     });

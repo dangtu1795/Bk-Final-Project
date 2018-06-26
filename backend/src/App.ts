@@ -16,7 +16,7 @@ export default class App {
 
     // ref to Express instance
     public express: express.Application;
-    public server = http.Server;
+    public server = (http as any).Server;
 
     //Run configuration methods on the Express instance.
     constructor(options) {

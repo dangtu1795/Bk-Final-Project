@@ -1,7 +1,7 @@
 <section class="content-header" style="margin-bottom: 50px">
   <ol class="breadcrumb">
     <li><a ><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Dashboard</li>
+    <li class="active">Faculty Detail</li>
   </ol>
 </section>
 
@@ -20,40 +20,46 @@
         <form role="form">
           <div class="box-body">
             <div class="form-group">
-              <label >Name</label>
-              <input type="text" class="form-control"  placeholder="Name ...">
+              <label>Name</label>
+              <input type="text" class="form-control" name="name"  [(ngModel)]="Faculty.name"  placeholder="Name ...">
             </div>
             <div class="form-group">
-              <label >Foundation Date</label>
-              <input type="text" class="form-control" placeholder="Foundation Date ...">
+              <label>Foundation Date</label>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="starting-date-picker border">
+                    <my-date-picker [options]="DatePickerOptions" [(ngModel)]="schedule_start"
+                                    name="schedule_start" (dateChanged)="test()"></my-date-picker>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label>Phone</label>
-              <input type="text" class="form-control"  placeholder="Phone ...">
+              <input type="text" class="form-control" name="phone" [(ngModel)]="Faculty.phone"  placeholder="Phone ...">
             </div>
             <div class="form-group">
               <label>Website</label>
-              <input type="text" class="form-control"  placeholder="Website ...">
+              <input type="text" class="form-control" name="website" [(ngModel)]="Faculty.website"  placeholder="Website ...">
             </div>
             <div class="form-group">
               <label>Email</label>
-              <input type="email" class="form-control"  placeholder="Email ...">
+              <input type="email" class="form-control" name="email" [(ngModel)]="Faculty.email" placeholder="Email ...">
             </div>
             <div class="form-group">
               <label>OverView</label>
-              <textarea class="form-control" rows="3" placeholder="Overview ..."></textarea>
+              <textarea class="form-control" rows="3" name="overview" [(ngModel)]="Faculty.overview" placeholder="Overview ..."></textarea>
             </div>
           </div>
           <!-- /.box-body -->
 
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-danger" routerLink="/admin/faculty">back</a>
           </div>
         </form>
       </div>
       <!-- /.box -->
-
-
     </div>
 
   </div>

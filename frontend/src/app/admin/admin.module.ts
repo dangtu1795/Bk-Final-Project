@@ -6,7 +6,11 @@ import { MajorListComponent } from './major-list/major-list.component';
 import { FacultyListComponent } from './faculty-list/faculty-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { UserComponent } from './user/user.component';
-import {MajorDetailComponent} from "./major-detail/major-detail.component";
+import {FacultyDetailComponent} from "./major-detail/faculty-detail.component";
+import {FormsModule} from "@angular/forms";
+import {MyDatePickerModule} from "../share-components/my-date-picker/my-date-picker.module";
+import {TableComponent} from "../components/table/table.component";
+import {ShareModule} from "../share-components/share.module";
 
 const adminRoute = [
   {
@@ -24,14 +28,10 @@ const adminRoute = [
       path: 'schedule', component: ScheduleComponent
     },
     {
-      path: 'faculty/:id', component: MajorListComponent
+      path: 'faculty/:id', component: FacultyDetailComponent
     },
     {
-      path: 'faculty/create', component: MajorListComponent
-    }
-    ,
-    {
-      path: 'major/:id', component: MajorDetailComponent
+      path: 'faculty/create', component: FacultyDetailComponent
     }
   ]
   }
@@ -41,9 +41,20 @@ const adminRoute = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    MyDatePickerModule,
+    ShareModule,
     RouterModule.forRoot(adminRoute),
   ],
-  declarations: [AdminComponent, MajorListComponent, FacultyListComponent, ScheduleComponent, UserComponent, MajorDetailComponent]
+  declarations: [
+    AdminComponent,
+    MajorListComponent,
+    FacultyListComponent,
+    ScheduleComponent,
+    UserComponent,
+    FacultyDetailComponent,
+    TableComponent,
+  ]
 })
 
 export class AdminModule { }

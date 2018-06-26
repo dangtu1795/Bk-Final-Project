@@ -25,6 +25,34 @@ export class UserService{
     return this.http.post('user', data).toPromise();
   }
 
+  getUser() {
+    return this.http.get('user').toPromise();
+  }
+
+  getSchedules() {
+    return this.http.get('hour').toPromise();
+  }
+
+  createHour(data) {
+    return this.http.post('hour', data).toPromise();
+  }
+
+  getFaculties() {
+    return this.http.get('faculty').toPromise();
+  }
+
+  getFaculty(id) {
+    return this.http.get(`faculty/${id}`).toPromise();
+  }
+
+  createFaculty(data) {
+    return this.http.post('faculty', data).toPromise();
+  }
+
+  createMajor(data) {
+    return this.http.post('major', data).toPromise();
+  }
+
   async checkToken(token) {
     return this.http.post("token/check", {token}).toPromise();
   }

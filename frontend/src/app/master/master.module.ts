@@ -55,9 +55,9 @@ const masterRoute = [
     CommonModule,
     FormsModule,
     RouterModule.forRoot(masterRoute),
-    ShareModule,
     MyDatePickerModule,
-    YoutubePlayerModule
+    YoutubePlayerModule,
+    ShareModule
   ],
   declarations: [
     MasterComponent,
@@ -67,8 +67,7 @@ const masterRoute = [
     QuestionComponent,
     ClassComponent,
     CourseNewComponent,
-    ClassNewComponent,
-    TimePipe
+    ClassNewComponent
   ]
 })
 export class MasterModule {

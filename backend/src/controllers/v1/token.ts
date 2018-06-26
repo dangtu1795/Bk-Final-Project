@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { CrubAPI } from "../interfaces/CrubAPI";
 import auth from "../../libs/auth";
-import { ResponseCode } from "enums/response-code";
-import ResponseTemplate from "helpers/response-template";
+import ResponseTemplate from "../../helpers/response-template";
+import {ResponseCode} from "../../enums/response-code";
 
 
 class Token extends CrubAPI {

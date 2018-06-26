@@ -35,10 +35,41 @@ class User extends CrubAPI {
     async list(req: Request, res: Response) {
         try {
             let jwt = (req as any).jwt;
-            let listUser = schemas.User.findAll();
+            let students = await schemas.User.findAll({
+                where: {role: 'student'},
+                include:[{model: schemas.StudentProfile}]
+            });
+            let masters = await schemas.User.findAll({
+                where: {role: 'master'},
+                include:[{model: schemas.MasterProfile}]
+            });
+            let res_students = [];
+            for(let student of students) {
+                res_students.push({
+                    name: student.StudentProfile.name,
+                    student_id: student.StudentProfile.student_id,
+                    nickname: student.StudentProfile.display_name,
+                    overview: student.StudentProfile.overview,
+                    phone: student.phone,
+                    email: student.email,
+                    gender: student.gender,
+                })
+            }
+            let res_masters = [];
+            for(let master of masters) {
+                res_masters.push({
+                    name: master.MasterProfile.name,
+                    master_id: master.MasterProfile.master_id,
+                    overview: master.self_introduction,
+                    rating: master.rating,
+                    phone: master.phone,
+                    email: master.email,
+                    gender: master.gender,
+                })
+            }
             return res.send(ResponseTemplate.success({
                 code: ResponseCode.SUCCESS,
-                data: listUser,
+                data: [res_students, res_masters],
                 user_request: jwt.username
             }));
         } catch (e) {

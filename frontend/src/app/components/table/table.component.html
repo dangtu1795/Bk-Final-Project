@@ -1,0 +1,44 @@
+<table *ngIf="headers" class="table">
+    <thead>
+        <tr>
+            <th *ngIf="is_index">#</th>
+            <th *ngFor="let header of headers" class="text-center">
+                {{header}}
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let eachData of data_to_show; let index = index">
+            <td *ngIf="is_index" class="font-weight-bold align-middle">{{index + 1}}</td>
+            <td *ngFor="let key of fields_to_get" class="text-center align-middle">
+              <ng-container *ngIf="isFunction(key); else other">{{key(eachData)}}</ng-container>
+              <ng-template #other>{{eachData[key] || '-'}}</ng-template>
+
+                <span class="float-right" *ngIf="status_place.indexOf(key) != -1">
+                    <i [ngStyle]="{
+                        'color':status_keyword_green.indexOf(eachData[status_fields]) > -1 ? '#1aff1a' : status_keyword_blue.indexOf(eachData[status_fields]) > -1 ? '#0069d9': '#ff3333'
+                    }" class="fas fa-circle"></i>
+                </span>
+            </td>
+            <td *ngIf="buttons" class="fit align-middle">
+              <ng-container *ngFor="let button of buttons">
+                <a *ngIf="button.url" class="{{button.class}}" [routerLink]="['/'+button.url+eachData.id]" >{{button.name}}</a>
+                <button *ngIf="!button.url" class="{{button.class}}" style="text-align: center; margin-left: 5px;" (click)="button_click(eachData, button.function)">
+                  {{button.name}}
+                </button>
+              </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><button style="width: 100px" class="page-link" (click)="back()" [disabled]="current_page == 1">Previous</button></li>
+
+        <li *ngFor="let i of value_pages" class="page-item" [class.active]="current_page == i"><button style="width: 50px" class="page-link" (click)="setCurrent(i)" [disabled]="current_page == i" [attr.aria-pressed]="current_page == i">{{i}}</button></li>
+
+        <li class="page-item"><button style="width: 100px" class="page-link" (click)="next()" [disabled]="current_page == total_pages">Next</button></li>
+    </ul>
+</nav>

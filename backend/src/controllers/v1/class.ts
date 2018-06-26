@@ -1,4 +1,4 @@
-import {Response, Request, e} from "express";
+import {Response, Request} from "express";
 import {schemas} from "../../schemas/index";
 import {CrubAPI} from "../interfaces/CrubAPI";
 import ResponseTemplate from "../../helpers/response-template";
@@ -17,14 +17,13 @@ export class Classes extends CrubAPI {
     async list(req: Request, res: Response) {
         try {
             let jwt = (req as any).jwt;
-            let classes
+            let classes;
             let user = await schemas.findByPrimary(jwt.u_id);
             if (user.role != 'student') {
                 return res.send(ResponseTemplate.accessDenied());
-                let profile = await user.getStudentProfile();
-                classes = profile.getClass();
             }
-
+            let profile = await user.getStudentProfile();
+            classes = profile.getClass();
 
             return res.send(ResponseTemplate.success({
                 code: ResponseCode.SUCCESS,
